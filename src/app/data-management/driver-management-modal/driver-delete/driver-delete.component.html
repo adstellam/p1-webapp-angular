@@ -1,0 +1,21 @@
+<div class="modal-content">
+
+	<div class="modal-header" style="background-color: azure;">
+		<span class="modal-title">Remove Driver {{driver.id}}</span>
+	</div>
+
+	<div class="modal-body container" >
+		<div class="row justify-content-around" style="height: 60px; line-height: 60px; font-size: 9px;">
+			Are you sure to remove this driver record?
+		</div>
+		<div class="row justify-content-around" style="font-size: 9px;">
+			<span class="button button-confirm" (click)="deleteDriver()">Confirm & Close</span>
+			<span class="button button-cancel" (click)="activeModal.close()">Cancel</span>
+		</div>
+	</div>
+
+	<div class="modal-footer" style="background-color: lightgray;">
+
+	</div>
+
+</div>

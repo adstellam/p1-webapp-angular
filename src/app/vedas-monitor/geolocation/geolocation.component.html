@@ -1,0 +1,44 @@
+<div class="grid-container">
+
+	<div class="grid-item-1">
+		<div class="header header-bluegreen">
+			Vehicle & Driver Information
+		</div>
+		<div *ngIf="device" class="box box-azure">
+			<ng-container *ngIf="device.vehicleId">
+				Vehicle Id|Desc: {{device.vehicleId.split(':')[1]}}|{{vehicleDesc}}<br>
+			</ng-container>
+			<ng-container *ngIf="!device.vehicleId">
+				Vehicle Id|Desc:
+			</ng-container>
+			<ng-container *ngIf="device.driverId">
+				Driver Id|Name: {{device.driverId}}|{{driverName}}
+			</ng-container>
+			<ng-container *ngIf="!device.driverId">
+				Driver Id|Name: 
+			</ng-container>
+		</div>
+		<div class="header header-gray">
+			Select Desired Path Duration
+		</div>
+		<div class="box box-azure" style="text-align: center;">
+			<select [formControl]="pathDurationFormControl">
+	            <option *ngFor="let hr of hourList" value={{hr}}>{{hr}} hr</option>
+	        </select>
+	        <button class="submit" (click)="getPath()">Apply</button>
+		</div>
+		<div class="header header-magenta">
+			Real-Time Telematics
+		</div>
+		<div class="box box-lavender">
+			Speed: {{speed}}<br>
+			Location: {{location}}
+		</div>
+	</div>
+
+	
+	<div class="grid-item-2">
+		<app-map [deviceId]="deviceId" [cid]="cid" [pathDuration]="pathDuration"></app-map>
+	</div>
+
+</div>

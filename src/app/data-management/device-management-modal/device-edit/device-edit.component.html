@@ -1,0 +1,63 @@
+<div class="modal-content">
+
+    <div class="modal-header" style="background-color: azure;">
+        <span class="modal-title">Edit Device {{device.id}}</span>
+    </div>
+
+    <div class="modal-body container" style="font-size: 9px;">
+        <form [formGroup]="deviceEditForm" (ngSubmit)="editDevice()">
+         	<div class="form-group">
+            	<label class="col-sm-4">Hardware Version</label>
+                <select class="col-sm-4" formControlName="hardwareVersion">
+                    <option value={{device.hardwareVersion}} selected>{{device.hardwareVersion}}</option>
+                    <option *ngFor="let ver of hardwareVersionList" [value]="ver" [disabled]="device.hardwareVersion == ver">{{ver}}</option>
+                </select>
+          	</div>
+        	<div class="form-group">
+            	<label class="col-sm-4">Software Version</label>
+                <select class="col-sm-4" formControlName="softwareVersion">
+                    <option value={{device.softwareVersion}} selected>{{device.softwareVersion}}</option>
+                    <option *ngFor="let ver of softwareVersionList" [value]="ver" [disabled]="device.softwareVersion == ver">{{ver}}</option>
+                </select>
+        	</div>
+            <div class="form-group">
+                <label class="col-sm-4">Optional Peripherals</label>
+                <label *ngFor="let p of optionalPeripheralList" class="checkbox">
+                    <input type="checkbox" [checked]="device.optionalPeripheral.includes(p)" (change)="setCheckboxFormControls(p, $event.target.checked)">
+                    {{p}}&nbsp;&nbsp;&nbsp;
+                </label>
+            </div>
+        	<div class="form-group">
+            	<label class="col-sm-4">IP Address (in CIDR if IP4)</label>
+                <input type="text" class="col-sm-4" placeholder={{device.ipAddress}} formControlName="ipAddress">
+        	</div>
+            <div class="form-group">
+                <label class="col-sm-4">IP Address Type</label>
+                <label class="radio-inline col-sm-2">
+                    <input type="radio" value="IP4" formControlName="ipAddressType" [checked]="device.ipAddressType == 'IP4'">
+                    IP4
+                </label>
+                <label class="radio-inline col-sm-2">
+                    <input type="radio" value="IP6" formControlName="ipAddressType" [checked]="device.ipAddressType == 'IP6'">
+                    IP6
+                </label>
+            </div>
+        	<div class="form-group">
+            	<label class="col-sm-4">Net Service</label>
+                <select class="col-sm-4" formControlName="nsp">
+                    <option value={{device.nsp}} selected>{{device.nsp}}</option>
+                    <option *ngFor="let nsp of nspList" [value]="nsp" [disabled]="device.nsp == nsp">{{nsp}}</option>   
+                </select>
+        	</div>      
+            <div class="row justify-content-around">
+                <button type="submit" class="btn btn-primary btn-sm" [disabled]="!deviceEditForm.valid">Submit & Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" (click)="activeModal.close()">Cancel</button>
+            </div>
+	    </form>
+    </div>
+
+    <div class="modal-footer" style="background-color: lightgray;">
+    </div>
+
+</div>
+

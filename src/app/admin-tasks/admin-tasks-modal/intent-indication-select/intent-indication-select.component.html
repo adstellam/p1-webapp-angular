@@ -1,0 +1,17 @@
+<div class="modal-content">
+    <div class="modal-header" style="background-color: azure;">
+        <span class="modal-title">Select new intent indication</span>
+    </div>
+	<div class="modal-body container" style="font-size: 9px;">
+    	<ng-container *ngFor="let intentIndication of intentIndicationList">
+            <input type="radio" name="intentIndication" [value]="intentIndication.val" [formControl]="intentIndicationFormControl">
+            <label>&nbsp;&nbsp;&nbsp;{{intentIndication.desc}}</label><br>
+        </ng-container>
+        <div class="row justify-content-around">
+            <span class="button button-blue" (click)="onIntentIndicationSelected(intentIndicationFormControl.value)" [ngClass]="{ 'button-disabled': !intentIndicationFormControl.value }">Done</span>
+            <span class="button button-gray" (click)="activeModal.close()">Cancel</span>
+        </div>
+    </div>
+    <div class="modal-footer" style="background-color: lightgray;">
+    </div>
+</div>

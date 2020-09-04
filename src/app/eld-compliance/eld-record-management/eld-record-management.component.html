@@ -1,0 +1,82 @@
+<div class="grid-container">
+
+	<div class="grid-item-1">
+		<div class="header header-bluegreen">
+			Select Driver and ELD Record Date
+		</div>
+		<div class="box box-azure">
+			<form [formGroup]="eldRecordSelectionForm" (ngSubmit)="onEldRecordSelectionFormSubmitted()">
+				<div class="form-group">
+					<label>Driver&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<select formControlName="driverId" required>
+						<option value="" selected disabled>Choose one</option>
+						<ng-container *ngIf="driverMap">
+							<option *ngFor="let id of driverMap.keys()" value={{id}}>{{id}}|{{driverMap.get(id).firstName}} {{driverMap.get(id).lastName}}</option>
+						</ng-container>
+			        </select>
+				</div>
+				<div class="form-group">
+					<label>ELD Record Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<select formControlName="eldRecordDate" required>
+						<option value="" selected disabled>Choose one</option>
+		            	<option *ngFor="let d of eldDateObjList" value={{d.dateStr}}>{{d.dateStr}}</option>
+		        	</select>
+				</div>
+            	<div style="text-align: center;">
+	        		<button type="submit" class="submit" [disabled]="!eldRecordSelectionForm.valid">Apply</button>
+	        	</div>
+	    	</form>
+		</div>
+		<div class="header header-gray">
+			Selected Data
+		</div>
+		<div class="box box-azure">
+			<ng-container *ngIf="driverId && driverMap">
+				Driver Id|Name: {{driverId}}|{{driverMap.get(driverId).firstName}} {{driverMap.get(driverId).lastName}}<br>
+			</ng-container>
+			<ng-container *ngIf="eldRecordDate">
+				ELD Record Date: {{eldRecordDate}} (version {{eldRecordVersion}})<br>
+			</ng-container>
+			<ng-container *ngIf="eldRecordVersion ==  1 && eldRecordCertifiedAt">
+				Certified: Yes. Certified at {{eldRecordCertifiedAt}}.
+			</ng-container>
+			<ng-container *ngIf="eldRecordVersion ==  1 && !eldRecordCertifiedAt">
+				Certified: No
+			</ng-container>
+			<ng-container *ngIf="eldRecordVersion > 1 && eldRecordCertifiedAt">
+				Certified: Yes. Edited then certified at {{eldRecordCertifiedAt}}.
+			</ng-container>
+			<ng-container *ngIf="eldRecordVersion > 1 && !eldRecordCertifiedAt">
+				Certified: No. Edited but not recertified.
+			</ng-container>
+		</div>
+		<div class="header header-magenta">
+			Actions
+		</div>
+		<div class="box box-lavender box-centered-content">
+			<button class="button" (click)="modifyEldRecord()">Modify ELD Record</button>
+			<button class="button" (click)="certifyEldRecordByDriver()">Certify|Recertify by Driver</button>
+			<!-- <button class="button" (click)="certifyEldRecordByDriver()" [disabled]="!isDriver">Certify|Recertify by Driver</button> -->
+			<button class="button" (click)="showEldRecordInPdf()">Display in PDF</button>
+			<button class="button" (click)="saveEldRecordInPdf()">Save in PDF</button>
+			<button class="button" (click)="printEldRecordInPdf()">Print in PDF</button>
+		</div>
+	</div>
+
+	
+	<div class="grid-item-2">
+		<ng-container *ngIf="eldEventSeqMap && eldRecordPart == 'header'">
+			<app-eld-record-header [driverId]="driverId" [cid]="cid" [eldRecordDate]="eldRecordDate" [eldEventSeqMap]="eldEventSeqMap" (showOtherEldRecordPartClicked)="showOtherEldRecordPart($event)"></app-eld-record-header>
+		</ng-container>
+		<ng-container *ngIf="eldEventSeqMap && eldRecordPart == 'rods'">
+			<app-eld-record-rods [driverId]="driverId" [cid]="cid" [eldRecordDate]="eldRecordDate" [eldEventSeqMap]="eldEventSeqMap" (showOtherEldRecordPartClicked)="showOtherEldRecordPart($event)"></app-eld-record-rods>
+		</ng-container>
+		<ng-container *ngIf="eldEventSeqMap && eldRecordPart == 'supplement'">
+			<app-eld-record-supplement [driverId]="driverId" [cid]="cid" [eldRecordDate]="eldRecordDate" [eldEventSeqMap]="eldEventSeqMap" (showOtherEldRecordPartClicked)="showOtherEldRecordPart($event)"></app-eld-record-supplement>
+		</ng-container>
+		<ng-container *ngIf="eldEventSeqMap && eldRecordPart == 'modification'">
+			<app-eld-record-modify [driverId]="driverId" [cid]="cid" [eldRecordDate]="eldRecordDate" [eldEventSeqMap]="eldEventSeqMap" (commitClicked)="onModificationCommitted($event)" (discardClicked)="showOtherEldRecordPart($event)"></app-eld-record-modify>
+		</ng-container>
+	</div>
+
+</div>

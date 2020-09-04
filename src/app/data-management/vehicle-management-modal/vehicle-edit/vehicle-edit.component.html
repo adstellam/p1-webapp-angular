@@ -1,0 +1,51 @@
+<div class="modal-content">
+
+    <div class="modal-header" style="background-color: azure;">
+        <span class="modal-title">Edit Vehicle {{vehicle.id.split(':')[1]}}</span>
+    </div>
+
+    <div class="modal-body container" style="font-size: 9px;">
+        <form [formGroup]="vehicleEditForm" (ngSubmit)="editVehicle()">
+            <div *ngIf="vehicle" class="form-group">
+            	<label class="col-sm-4">VIN</label>
+            	<input type="text" class="col-sm-7" placeholder={{vehicle.vin}} formControlName="vin">
+            </div>
+          	<div *ngIf="vehicle" class="form-group">
+                <label class="col-sm-4">Power Unit Number</label>
+                <input type="text" class="col-sm-7" placeholder={{vehicle.powerUnitNumber}} formControlName="powerUnitNumber">
+            </div>
+            <div *ngIf="vehicle" class="form-group">
+                <label class="col-sm-4">Miles at MIL Clear</label>
+                <input type="text" class="col-sm-7" placeholder={{vehicle.milesAtMilClear}} formControlName="milesAtMilClear">
+            </div>
+            <div *ngIf="vehicle" class="form-group">
+            	<label class="col-sm-4">Make</label>
+            	<input type="text" class="col-sm-3" placeholder={{vehicle.make}} formControlName="make">
+            </div>
+            <div *ngIf="vehicle" class="form-group">
+            	<label class="col-sm-4">Model & Year</label>
+            	<input type="text" class="col-sm-3" placeholder={{vehicle.model}} formControlName="model">
+            	<label class="col-sm-1"></label>
+                <select class="col-sm-3" formControlName="year">
+                    <option value={{vehicle.year}} selected>{{vehicle.year}}</option>
+                    <option *ngFor="let yr of yearList" [value]="yr" [disabled]="yr == vehicle.year">{{yr}}</option>
+                </select>
+            </div>
+            
+            <div *ngIf="vehicle" class="form-group">
+            	<label class="col-sm-4">Trailer Number</label>
+            	<input type="text" class="col-sm-7" placeholder={{vehicle.trailerNumber}} formControlName="trailerNumber">
+            </div>
+            <div class="row justify-content-around">
+                <button type="submit" class="btn btn-primary btn-sm" [disabled]="!vehicleEditForm.valid">Submit & Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" (click)="activeModal.close()">Cancel</button>
+            </div>
+	    </form>
+    </div>
+
+    <div class="modal-footer" style="background-color: lightgray;">
+    </div>
+
+</div>
+
+

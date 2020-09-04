@@ -1,0 +1,210 @@
+<div style="display: grid; grid-template-columns: 9fr 1fr; grid-column-gap: 12px;">
+
+    <div *ngIf="eldEventSeqMap">
+        <ng-container *ngFor="let deviceId of eldEventSeqMap.keys()">
+        
+            <div class="table-container table-responsive">
+                <table class="table table-condensed table-hover">
+                    <caption>Device {{deviceId}} | {{eldRecordDate}} | Change of Duty Status, Intervening Recording, and Change in Driver's Indication</caption>
+                    <thead>
+                        <tr>
+                            <td>Time</td>
+                            <td>Event|Code</td>
+                            <td>Status</td>
+                            <td>Origin</td>
+                            <td>Location</td>
+                            <td>Odometer</td>
+                            <td>Engine Hrs</td>
+                            <td>Comment</td>
+                            <td>Modify?</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let eldEvent of eldEventSeqMap.get(deviceId)">   
+                        	<tr *ngIf="eldEvent.type == 1 || eldEvent.type == 2 || eldEvent.type == 3" [ngClass]="{ 'event-modified': modifiedEventSeqNumbers.includes(eldEvent.seqNumber) }">
+                            	<td>{{eldEvent.timeStr}}</td>
+                            	<td>{{eldEvent.type}}|{{eldEvent.code}}</td>
+                            	<td>{{eldEvent.status}}</td>
+                            	<td>{{eldEvent.origin}}</td>
+                            	<td>{{eldEvent.location}}</td>
+                            	<td>{{eldEvent.vehicleMiles}}</td>
+                            	<td>{{eldEvent.engineHours}}</td>
+                            	<td>{{eldEvent.comment}}</td>
+                            	<td><button class="button button-modify" (click)="openEldEventEditModal(deviceId, eldEvent)">Modify</button></td>
+                        	</tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+        	</div>
+
+            <div class="table-container table-responsive">
+                <table class="table table-condensed table-hover">
+                    <caption>Device {{deviceId}} | {{eldRecordDate}} | Driver's Record Certification Events</caption>
+                    <thead>
+                        <tr>
+                            <td>Time</td>
+                            <td>Event|Code</td>
+                            <td>Status</td>
+                            <td>Origin</td>
+                            <td>Location</td>
+                            <td>Odometer</td>
+                            <td>Engine Hrs</td>
+                            <td>Comment</td>
+                            <td>Modify?</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let eldEvent of eldEventSeqMap.get(deviceId)">   
+                            <tr *ngIf="eldEvent.type == 4" [ngClass]="{ 'event-modified': modifiedEventSeqNumbers.includes(eldEvent.seqNumber) }">
+                                <td>{{eldEvent.timeStr}}</td>
+                                <td>{{eldEvent.type}}|{{eldEvent.code}}</td>
+                                <td>{{eldEvent.status}}</td>
+                                <td>{{eldEvent.origin}}</td>
+                                <td>{{eldEvent.location}}</td>
+                                <td>{{eldEvent.vehicleMiles}}</td>
+                                <td>{{eldEvent.engineHours}}</td>
+                                <td>{{eldEvent.comment}}</td>
+                                <td><button class="button button-modify" (click)="openEldEventEditModal(deviceId, eldEvent)">Modify</button></td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--
+            <div class="table-container table-responsive">
+                <table class="table table-condensed table-hover">
+                    <caption>Device {{deviceId}} | {{eldRecordDate}} | Driver's Login/Logout Events</caption>
+                    <thead>
+                        <tr>
+                            <td>Time</td>
+                            <td>Event|Code</td>
+                            <td>Status</td>
+                            <td>Origin</td>
+                            <td>Location</td>
+                            <td>Odometer</td>
+                            <td>Engine Hrs</td>
+                            <td>Comment</td>
+                            <td>Modify?</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let eldEvent of eldEventSeqMap.get(deviceId)">   
+                            <tr *ngIf="eldEvent.type == 5" [ngClass]="{ 'event-modified': modifiedEventSeqNumbers.includes(eldEvent.seqNumber) }">
+                                <td>{{eldEvent.timeStr}}</td>
+                                <td>{{eldEvent.type}}|{{eldEvent.code}}</td>
+                                <td>{{eldEvent.status}}</td>
+                                <td>{{eldEvent.origin}}</td>
+                                <td>{{eldEvent.location}}</td>
+                                <td>{{eldEvent.vehicleMiles}}</td>
+                                <td>{{eldEvent.engineHours}}</td>
+                                <td>{{eldEvent.comment}}</td>
+                                <td><button class="button button-modify" (click)="openEldEventEditModal(deviceId, eldEvent)">Modify</button></td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-container table-responsive">
+                <table class="table table-condensed table-hover">
+                    <caption>Device {{deviceId}} | {{eldRecordDate}} | Engine Power-Up/Shutdown Events</caption>
+                    <thead>
+                        <tr>
+                            <td>Time</td>
+                            <td>Event|Code</td>
+                            <td>Status</td>
+                            <td>Origin</td>
+                            <td>Location</td>
+                            <td>Odometer</td>
+                            <td>Engine Hrs</td>
+                            <td>Comment</td>
+                            <td>Modify?</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let eldEvent of eldEventSeqMap.get(deviceId)">   
+                            <tr *ngIf="eldEvent.type == 6" [ngClass]="{ 'event-modified': modifiedEventSeqNumbers.includes(eldEvent.seqNumber) }">
+                                <td>{{eldEvent.timeStr}}</td>
+                                <td>{{eldEvent.type}}|{{eldEvent.code}}</td>
+                                <td>{{eldEvent.status}}</td>
+                                <td>{{eldEvent.origin}}</td>
+                                <td>{{eldEvent.location}}</td>
+                                <td>{{eldEvent.vehicleMiles}}</td>
+                                <td>{{eldEvent.engineHours}}</td>
+                                <td>{{eldEvent.comment}}</td>
+                                <td><button class="button button-modify" (click)="openEldEventEditModal(deviceId, eldEvent)">Modify</button></td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="table-container table-responsive">
+                <table class="table table-condensed table-hover">
+                    <caption>Device {{deviceId}} | {{eldRecordDate}} | Device Malfunction & Diagnostics Events</caption>
+                    <thead>
+                        <tr>
+                            <td>Time</td>
+                            <td>Event|Code</td>
+                            <td>Status</td>
+                            <td>Origin</td>
+                            <td>Location</td>
+                            <td>Odometer</td>
+                            <td>Engine Hrs</td>
+                            <td>Comment</td>
+                            <td>Modify?</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let eldEvent of eldEventSeqMap.get(deviceId)">   
+                            <tr *ngIf="eldEvent.type == 7" [ngClass]="{ 'event-modified': modifiedEventSeqNumbers.includes(eldEvent.seqNumber) }">
+                                <td>{{eldEvent.timeStr}}</td>
+                                <td>{{eldEvent.type}}|{{eldEvent.code}}</td>
+                                <td>{{eldEvent.status}}</td>
+                                <td>{{eldEvent.origin}}</td>
+                                <td>{{eldEvent.location}}</td>
+                                <td>{{eldEvent.vehicleMiles}}</td>
+                                <td>{{eldEvent.engineHours}}</td>
+                                <td>{{eldEvent.comment}}</td>
+                                <td><button class="button button-modify" (click)="openEldEventEditModal(deviceId, eldEvent)">Modify</button></td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="table-container table-responsive">
+                <table class="table table-condensed table-hover">
+                    <caption>Device {{deviceId}} | {{eldRecordDate}} | Unspecified Driver Profile Events</caption>
+                    <thead>
+                        <tr>
+                            <td>Time</td>
+                            <td>Event|Code</td>
+                            <td>Status</td>
+                            <td>Origin</td>
+                            <td>Location</td>
+                            <td>Odometer</td>
+                            <td>Engine Hrs</td>
+                            <td>Comment</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let eldEvent of eldEventSeqMap.get(deviceId)">   
+                            
+                        </ng-container>
+                    </tbody>
+                </table>   
+            </div>
+            -->
+
+        </ng-container>
+    </div>
+
+    <div class="buttons-container">
+        <button class="button button-commit" (click)="commitModifications()" [disabled]="!preAndPostModEventPairs.length" [ngClass]="{ 'button-disabled': !preAndPostModEventPairs.length }">Commit Modifications</button>
+        <button class="button button-discard" (click)="discardModifications()">Discard Modifications</button>
+    </div>
+
+</div>
+

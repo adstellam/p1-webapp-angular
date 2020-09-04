@@ -1,0 +1,23 @@
+<div class="card">
+	<div class="card-body">
+		<div class="card-title">{{title}}</div>
+		<div class="card-text">
+			<ng-container *ngIf="chartReady">
+				<canvas baseChart id="canvas" width="640" height="160" 
+					[chartType]="chartType"
+					[labels]="chartLabels"
+					[data]="chartDatasets"
+					[colors]="chartColors"
+					[options="chartOptions"
+					(chartHover)="onChartHovered()"
+					(chartClick)="onChartClicked()">
+				</canvas>
+			</ng-container>
+			<ng-container *ngIf="!chartReady" class="d-flex justify-content-center text-dark">
+				<div class="spinner-border">
+					<span>Loading . . .</span>
+				</div>
+			</ng-container>
+		</div>
+	</div>
+</div>

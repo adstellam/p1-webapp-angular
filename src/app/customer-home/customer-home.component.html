@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-sm">
+	<div class="navbar-brand">
+		<img src="{{customerLogoFilePath}}" alt={{cid}} width="160" height="48">
+	</div>
+	<ul class="navbar-nav">
+		<li class="nav-item">
+			<a class="navlink" [routerLink]="['/customer-home', cid, 'vedas-monitor']">VeDAS Dashboard</a>
+		</li>
+		<li class="nav-item dropdown-anchor">
+			<a class="navlink">Tracking|Routing</a>
+			<div class="dropdown-content">
+				<a [routerLink]="['/customer-home', cid, 'vehicle-tracking']">Track Vehicles</a>
+				<a [routerLink]="['/customer-home', cid, 'asset-tracking']">Track In-Transit Assets</a>
+				<a [routerLink]="['/customer-home', cid, 'route-optimization']">Optimize Routes</a>
+			</div>
+		</li>
+		<li class="nav-item dropdown-anchor">
+			<a class="navlink">ELD Compliance</a>
+			<div class="dropdown-content">
+				<a [routerLink]="['/customer-home', cid, 'eld-record-management']">Review|Edit|Certify ELD Record</a>
+				<a [routerLink]="['/customer-home', cid, 'eld-report-submission']">Submit ELD Report</a>
+			</div>
+		</li>
+		<li class="nav-item dropdown-anchor">
+			<a class="navlink">Administrative Tasks</a>
+			<div class="dropdown-content">
+				<a [routerLink]="['/customer-home', cid, 'vedas-setup']">VeDAS Setup</a>
+				<a [routerLink]="['/customer-home', cid, 'driver-input']">Driver Input</a>
+				<a [routerLink]="['/customer-home', cid, 'asset-loading']">Asset Loading</a>
+			</div>
+		</li>
+		<li class="nav-item dropdown-anchor">
+			<a class="navlink">Data Managemnt</a>
+			<div class="dropdown-content">
+				<a [routerLink]="['/customer-home', cid, 'device-management']">Manage Devices</a>
+				<a [routerLink]="['/customer-home', cid, 'vehicle-management']">Manage Vehicles</a>
+				<a [routerLink]="['/customer-home', cid, 'driver-management']">Manage Drivers</a>
+				<a [routerLink]="['/customer-home', cid, 'asset-management']">Manage Assets</a>
+				<a [routerLink]="['/customer-home', cid, 'vedas-user-management']">Manage VeDAS Users</a>
+				<a [routerLink]="['/customer-home', cid, 'customer-management']">Edit Company Info</a>
+			</div>
+		</li>
+	</ul>
+
+	<span class="user">
+		<i class="material-icons" style="vertical-align: middle; color: darkslateblue;">account_box</i>
+		<span style="padding-right: 12px;">{{uid}}</span>
+		<button style="vertical-align: middle; background-color: red; color: white; border: none;" (click)="signout()">Sign Out</button>
+	</span>
+	
+</nav>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * -->	
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<router-outlet></router-outlet>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * -->

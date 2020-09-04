@@ -1,0 +1,67 @@
+<div class="modal-content">
+
+    <div class="modal-header" style="background-color: azure;">
+        <span class="modal-title">Add New Device</span>
+    </div>
+
+    <div class="modal-body container" style="font-size: 9px;">
+        <form [formGroup]="deviceAddForm" (ngSubmit)="addDevice()">
+        	<div class="form-group">
+            	<label class="col-sm-4">Device Id</label>
+            	<input type="text" class="col-sm-7" placeholder="Device Id" formControlName="id" required>
+          	</div>
+         	<div class="form-group">
+            	<label class="col-sm-4">Hardware Version</label>
+            	<select class="col-sm-4" formControlName="hardwareVersion" required>
+                    <option value="" selected disabled>Select one</option>
+                    <option *ngFor="let ver of hardwareVersionList" [value]="ver">{{ver}}</option>
+                </select>
+          	</div>
+        	<div class="form-group">
+            	<label class="col-sm-4">Software Version</label>
+            	<select class="col-sm-4" formControlName="softwareVersion" required>
+                    <option value="" selected disabled>Select one</option>
+                    <option *ngFor="let ver of softwareVersionList" [value]="ver">{{ver}}</option>
+                </select>
+        	</div>
+            <div class="form-group">
+                <label class="col-sm-4">Optional Peripherals</label>
+                <label *ngFor="let p of optionalPeripheralList" class="checkbox-inline">
+                    <input type="checkbox" (change)="setPeripheralFormArray(p, $event.target.checked)">
+                    {{p}}&nbsp;&nbsp;&nbsp;
+                </label>
+            </div>
+        	<div class="form-group">
+            	<label class="col-sm-4">IP Address (in CIDR if IP4)</label>
+            	<input type="text" class="col-sm-7" placeholder="IP Address" formControlName="ipAddress" required>
+        	</div>
+            <div class="form-group">
+                <label class="col-sm-4">IP Address Type</label>
+                <label class="radio-inline col-sm-2">
+                    <input type="radio" name="ipAddressType" value="IP4" formControlName="ipAddressType" required>
+                    IP4
+                </label>
+                <label class="radio-inline col-sm-2">
+                    <input type="radio" name="ipAddressType" value="IP6" formControlName="ipAddressType" required>
+                    IP6
+                </label>
+            </div>
+        	<div class="form-group">
+            	<label class="col-sm-4">Net Service</label>
+            	<select class="col-sm-4" formControlName="nsp" required>
+                    <option value="" selected disabled>Select a value</option>
+                    <option *ngFor="let nsp of nspList" [value]="nsp">{{nsp}}</option>   
+                </select>
+        	</div>      
+            <div class="row justify-content-around">
+                <button type="submit" class="btn btn-primary btn-sm" [disabled]="!deviceAddForm.valid">Submit & Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" (click)="activeModal.close()">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer" style="background-color: lightgray;">
+    	
+    </div>
+
+</div>

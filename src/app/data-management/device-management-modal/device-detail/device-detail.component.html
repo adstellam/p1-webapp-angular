@@ -1,0 +1,77 @@
+<div class="modal-content">
+
+	<div class="modal-header" style="background-color: azure;">
+    	<span class="modal-title">Device {{device.id}}</span>
+	</div>
+
+	<div class="modal-body" style="font-size: 9px;">
+		<table class="table table-condensed table-hover table-striped">
+			<tbody *ngIf="device">
+				<tr>
+					<td>Hardware Version</td>
+					<td>{{device.hardwareVersion}}</td>
+				</tr>
+				<tr>
+					<td>Software Version</td>
+					<td>{{device.softwareVersion}}</td>
+				</tr>
+				<tr>
+					<td>Optional Peripherals</td>
+					<td>{{device.optionalPeripheral}}</td>
+				</tr>
+				<tr>
+					<td>IP Address (in CIDR if IP4)</td>
+					<td>{{device.ipAddress}}</td>
+				</tr>
+				<tr>
+					<td>IP Address Type</td>
+					<td>{{device.ipAddressType}}</td>
+				</tr>
+				<tr>
+					<td>Net Service</td>
+					<td>{{device.nsp}}</td>
+				</tr>
+				<tr>
+					<td style="color: sienna;">&dagger; Installed on Vehicle</td>
+					<ng-container *ngIf="device.vehicleId && vehicle">
+						<td>{{device.vehicleId.split(':')[1]}}|{{vehicle.model}} ({{vehicle.year}})</td>
+					</ng-container>
+					<ng-container *ngIf="!device.vehicleId">
+						<td>Not installed</td>
+					</ng-container>
+				</tr>
+				<tr>
+					<td style="color: sienna;">&dagger; Driver Currently Signed In</td>
+					<ng-container *ngIf="device.driverId && driver">
+						<td>{{device.driverId}}|{{driver.firstName}} {{driver.lastName}}</td>
+					</ng-container>
+					<ng-container *ngIf="!device.driverId">
+						<td>Not assigned</td>
+					</ng-container>
+				</tr>
+				<tr>
+					<td style="color: sienna;">&dagger; Co-Driver Id|Name</td>
+					<ng-container *ngIf="device.codriverId && codriver">
+						<td>{{device.codriverId}}|{{codriver.firstName}} {{codriver.lastName}}</td>
+					</ng-container>
+					<ng-container *ngIf="!device.codriverId">
+						<td>Not assigned</td>
+					</ng-container>
+				</tr>
+				<tr style="color: darkgray;">
+					<td>Record Created at|by</td>
+					<td>{{device.createdAt}}|{{device.createdBy}}</td>
+				</tr>
+				<tr style="color: darkgray;">
+					<td>Record Last Edited at|by</td>
+					<td>{{device.editedAt}}|{{device.editedBy}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="modal-footer" style="background-color: lightgray;">
+
+	</div>
+
+</div>

@@ -1,0 +1,15 @@
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+	<agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+	<agm-polyline [strokeColor]="'#2196f3'" [visible]="pathVisible">
+		<ng-container *ngFor="let p of path">
+			<agm-polyline-point [latitude]="p.lat" [longitude]="p.lng"></agm-polyline-point>
+		</ng-container>
+	</agm-polyline>
+</agm-map>
+
+<div class="button-group">
+	<span class="button button-gray" (click)="zoomIn()"><i class="material-icons icons">add_circle_outline</i>Zoom In</span>
+	<span class="button button-gray" (click)="zoomOut()"><i class="material-icons icons">remove_circle_outline</i>Zoom Out</span>
+	<span class="button button-gray" (click)="toggleShowPath()"><i class="material-icons icons">toggle_on</i>Show/Hide Path</span>
+	<span class="button button-gray" (click)="close()"><i class="material-icons icons">close</i>Close</span>
+</div>

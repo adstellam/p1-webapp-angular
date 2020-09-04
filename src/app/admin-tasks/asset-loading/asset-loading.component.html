@@ -1,0 +1,145 @@
+<div class="grid-container">
+
+	<div class="grid-item-1">
+		<div class="header header-bluegreen">
+			Select Assets
+		</div>
+		<div class="box box-azure">
+			<form [formGroup]="assetSelectionForm" (ngSubmit)="onAssetSelectionFormSubmitted()">
+				<div class="form-group">
+					<label>Shipping Doc No.&nbsp;&nbsp;</label>
+					<input type="text" placeholder="Shipping Doc No." formControlName="id">
+				</div>
+            	<div style="text-align: center;">
+	        		<button type="submit" class="submit" [disabled]="!assetSelectionForm.valid">Find</button>
+	        	</div>
+	    	</form>
+	    	<div style="height: 36px; line-height: 36px; text-align: center;">------------ or ------------</div>
+			<form [formGroup]="assetFilterForm" (ngSubmit)="onAssetFilterFormSubmitted()">
+				<div class="form-group">
+					<label>Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<input type="text" placeholder="Type" formControlName="type">
+				</div>
+				<div class="form-group">
+					<label>Shipper&nbsp;&nbsp;</label>
+					<input type="text" placeholder="Shipper" formControlName="shipper">
+				</div>
+            	<div style="text-align: center;">
+	        		<button type="submit" class="submit">Filter</button>
+	        	</div>
+	    	</form>
+		</div>
+		<div class="header header-gray">
+			Selection|Filtering Criteria Entered
+		</div>
+		<div class="box box-azure">
+			<ng-container *ngIf="assetSelectionForm.value.id">
+				Shipping Doc No: {{assetSelectionForm.value.id}}<br>
+			</ng-container>
+			<ng-container *ngIf="!assetSelectionForm.value.id">
+				Shipping Doc No: None entered<br>
+			</ng-container>
+			<ng-container *ngIf="assetFilterForm.value.type">
+				Type: {{assetFilterForm.value.type}}<br>
+			</ng-container>
+			<ng-container *ngIf="!assetFilterForm.value.type">
+				Type: None entered<br>
+			</ng-container>
+			<ng-container *ngIf="assetFilterForm.value.shipper">
+				Shipper: {{assetFilterForm.value.shipper}}
+			</ng-container>
+			<ng-container *ngIf="!assetFilterForm.value.shipper">
+				Shipper: None entered
+			</ng-container>
+		</div>
+	</div>
+
+	<div class="grid-item-2">	
+		<div class="header header-bluegreen" style="width: 90%;">
+			Assignment of Selected Asset|Filtered Assets To Vehicle
+		</div>
+		<div class="table-responsive" style="width: 90%;">
+	        <table class="table table-condensed table-hover">
+	            <thead>
+	                <tr>
+	                    <td>Shipping Doc Number</td>
+	                    <td>Type</td>
+	                    <td>Shipper</td>
+	                    <td>Carrying Vehicle</td>
+	                    <td>Transfer|New Loading</td>
+	                    <td>Remove from Vehicle</td>
+	                </tr>
+	            </thead>
+	            <ng-container *ngIf="assetSelected">
+	            	<tbody>
+	            		<tr>
+	            			<td>{{assetSelected.id}}</td>
+		                    <td>{{assetSelected.type}}</td>
+		                    <td>{{assetSelected.shipper}}</td>
+		                    <td>
+		                    	<ng-container *ngIf="assetToVehicleMap && assetToVehicleMap.has(assetSelected.id)">
+		                			{{assetToVehicleMap.get(assetSelected.id).split(':')[1]}}
+		                			<span (click)="showShippingDocList(assetToVehicleMap.get(assetSelected.id))"><i class="material-icons icons icons-secondary">layers</i></span>
+		                		</ng-container>
+		                		<ng-container *ngIf="assetToVehicleMap && !assetToVehicleMap.has(assetSelected.id)">
+		                			Not loaded
+		                		</ng-container>
+		                	</td>
+		                	<td>
+		                		<ng-container *ngIf="assetToVehicleMap && assetToVehicleMap.has(assetSelected.id)">
+		                			<span class="button button-cyan" (click)="onAssetTransferred(assetSelected.id, assetToVehicleMap.get(assetSelected.id))">Transfer</span>
+		                		</ng-container>
+		                		<ng-container *ngIf="assetToVehicleMap && !assetToVehicleMap.has(assetSelected.id)">
+		                			<span class="button button-violet" (click)="onAssetLoaded(assetSelected.id)">Load</span>
+		                		</ng-container>
+		                	</td>
+		                	<td>
+		                		<ng-container *ngIf="assetToVehicleMap && assetToVehicleMap.has(assetSelected.id)">	
+		                			<span class="button button-cyan" (click)="onAssetRemoved(assetSelected.id, assetToVehicleMap.get(assetSelected.id))">Remove</span>
+		                		</ng-container>
+	                			<ng-container *ngIf="assetToVehicleMap && !assetToVehicleMap.has(assetSelected.id)">
+	                				N/A
+	                			</ng-container>
+	                		</td>
+	            		</tr>
+	            	</tbody>
+	            </ng-container>
+	            <ng-container *ngIf="assetsFiltered">
+	            	<tbody>
+		                <tr *ngFor="let a of assetsFiltered">   
+		                    <td>{{a.id}}</td>
+		                    <td>{{a.type}}</td>
+		                    <td>{{a.shipper}}</td>
+		                    <td>
+		                    	<ng-container *ngIf="assetToVehicleMap && assetToVehicleMap.has(a.id)">
+		                			{{assetToVehicleMap.get(a.id)}}
+		                			<span (click)="showShippingDocList(assetToVehicleMap.get(a.id))"><i class="material-icons icons icons-secondary">layers</i></span>
+		                		</ng-container>
+		                		<ng-container *ngIf="assetToVehicleMap && !assetToVehicleMap.has(a.id)">
+		                			Not loaded
+		                		</ng-container>
+		                	</td>
+		                	<td>
+		                		<ng-container *ngIf="assetToVehicleMap && assetToVehicleMap.has(a.id)">
+		                			<span class="button button-cyan" (click)="onAssetTransferred(a.id, assetToVehicleMap.get(a.id))">Transfer</span>
+		                		</ng-container>
+		                		<ng-container *ngIf="assetToVehicleMap && !assetToVehicleMap.has(a.id)">
+		                			<span class="button button-violet" (click)="onAssetLoaded(a.id)">Load</span>
+		                		</ng-container>
+		                	</td>
+		                	<td>
+		                		<ng-container *ngIf="assetToVehicleMap && assetToVehicleMap.has(a.id)">
+		                			<span class="button button-cyan" (click)="onAssetRemoved(a.id, assetToVehicleMap.get(a.id))">Remove</span>
+		                		</ng-container>
+	                			<ng-container *ngIf="assetToVehicleMap && !assetToVehicleMap.has(a.id)">
+	                				N/A
+	                			</ng-container>
+	                		</td>
+		                </tr>
+	            	</tbody>
+	            </ng-container>
+	        </table>
+	    </div>	
+	</div>
+
+</div>

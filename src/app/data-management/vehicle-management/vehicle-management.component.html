@@ -1,0 +1,45 @@
+<div class="grid-container">
+    
+    <div class="grid-item-11">
+        <span class="header">Manage Vehicle</span>
+    </div>
+    <div class="grid-item-12">
+        <span class="header">To view, edit, or delete a particular vehicle</span>
+    </div>
+    <div class="grid-item-21 image"> 
+        <img src="../../../assets/img/vehicles_img.png" width="160" height="120">
+        <span class="button button-100 button-palevioletred button-taller" (click)="openVehicleAddModal(cid)">Add Vehicle</span>
+    </div>
+
+    <div class="grid-item-22 table-responsive"> 
+        <table class="table table-condensed table-hover">
+            <thead>
+                <tr>
+                    <td>Vehicle Id</td>
+                    <td>Description</td>
+                    <td>VeDAS Device</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody *ngIf="vehicleMap">
+                <tr *ngFor="let vehicleId of vehicleMap.keys()">   
+                    <td style="background-color: lightgray;">{{vehicleId.split(':')[1]}}</td>
+                    <td>{{vehicleMap.get(vehicleId).make}} {{vehicleMap.get(vehicleId).model}} ({{vehicleMap.get(vehicleId).year}})</td>
+                    <td>
+                        <ng-container *ngIf="vehicleMap.get(vehicleId).deviceId">
+                            {{vehicleMap.get(vehicleId).deviceId}}
+                        </ng-container>
+                        <ng-container *ngIf="!vehicleMap.get(vehicleId).deviceId">
+                            Not installed
+                        </ng-container>
+                    <td>
+                        <span class="button button-60 button-cadetblue" (click)="openVehicleDetailModal(vehicleId)">Detail</span>
+                        <span class="button button-60 button-cornflowerblue" (click)="openVehicleEditModal(vehicleId)">Edit</span>
+                        <span class="button button-60 button-cornflowerblue" (click)="openVehicleDeleteModal(vehicleId)">Delete</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

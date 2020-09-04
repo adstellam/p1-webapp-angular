@@ -1,0 +1,22 @@
+<div class="modal-content">
+
+	<div class="modal-header" style="background-color: azure;">
+		<span class="modal-title">Remove Vehicle {{vehicle.id.split(':')[1]}}</span>
+	</div>
+
+	<div class="modal-body container" >
+		<div class="row justify-content-around" style="height: 60px; line-height: 60px; font-size: 12px;">
+			Are you sure to remove this vehicle record?
+		</div>
+		<div class="row justify-content-around" style="font-size: 9px;">
+			<span class="button button-confirm" (click)="deleteVehicle()">Confirm & Close</span>
+			<span class="button button-cancel" (click)="activeModal.close()">Cancel</span>
+		</div>
+	</div>
+
+	<div class="modal-footer" style="background-color: lightgray;">
+
+	</div>
+
+</div>
+

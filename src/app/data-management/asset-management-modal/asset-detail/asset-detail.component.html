@@ -1,0 +1,46 @@
+<div class="modal-content">
+
+	<div class="modal-header" style="background-color: azure;">
+    	<span class="modal-title">Asset {{asset.id}}</span>
+	</div>
+
+	<div class="modal-body" style="font-size: 9px;">
+		<table class="table table-condensed table-hover table-striped">
+			<tbody *ngIf="asset">
+				<tr>
+					<td>Asset Type</td>
+					<td>{{asset.type}}</td>
+				</tr>
+				<tr>
+					<td>Size Dimensions</td>
+					<td>L: {{asset.length}} | W: {{asset.width}} | H: {{asset.height}}</td>
+				</tr>
+				<tr>
+					<td>Weight</td>
+					<td>{{asset.weight}}</td>
+				</tr>
+				<tr>
+					<td>Shipper</td>
+					<td>{{asset.shipper}}</td>
+				</tr>
+				<tr>
+					<td>Origin & Dest</td>
+					<td>From: {{asset.origin}} | To: {{asset.destination}}</td>
+				</tr>
+				<tr style="color: darkgray;">
+					<td>Record Created at|by</td>
+					<td>{{asset.createdAt}}|{{asset.createdBy}}</td>
+				</tr>
+				<tr style="color: darkgray;">
+					<td>Record Last Edited at|by</td>
+					<td>{{asset.editedAt}}|{{asset.editedBy}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="modal-footer" style="background-color: lightgray;">
+
+	</div>
+
+</div>

@@ -1,0 +1,57 @@
+<div class="grid-container">
+
+	<div class="grid-item-1">
+		<form [formGroup]="videoSelectionForm" (ngSubmit)="onVideoSelectionSubmitted()">
+			<div class="header header-bluegreen">
+				Select Video Segments To Retrieve
+			</div>
+			<div class="box box-azure">
+				<label>
+					<input type="radio" name="video" value="fwd" formControlName="video" required>
+					&nbsp;&nbsp;Forward View
+				</label><br>
+				<label>
+					<input type="radio" name="video" value="cab" formControlName="video" required>
+					&nbsp;&nbsp;Cabin View
+				</label><br>
+				<label [ngClass]="{ 'inactive-selection': !peripherals.includes('aux-vid-1') }">
+					<input type="radio" name="video" value="aux1" formControlName="video" required>
+					&nbsp;&nbsp;Auxiliary View 1
+				</label><br>
+				<label [ngClass]="{ 'inactive-selection': !peripherals.includes('aux-vid-2') }">
+					<input type="radio" name="video" value="aux2" formControlName="video" required>
+					&nbsp;&nbsp;Auxiliary View 2
+				</label><br>
+				<label [ngClass]="{ 'inactive-selection': !peripherals.includes('aux-vid-3') }">
+					<input type="radio" name="video" value="aux3" formControlName="video" required>
+					&nbsp;&nbsp;Auxiliary View 3
+				</label>
+			</div>
+			<div class="header header-bluegreen">
+				Select Date & Time
+			</div>
+			<div class="box box-azure">
+				<div class="form-group">
+					mm:dd:yr&nbsp;&nbsp;&nbsp;&nbsp;
+            		<input type="number" min="1" max="12" placeholder="m" formControlName="month" required>&nbsp;&nbsp;
+            		<input type="number" min="1" max="31" placeholder="d" formControlName="day" required>&nbsp;&nbsp;
+            		<input type="number" min="20" max="21" placeholder="y" formControlName="year" required>
+            	</div>
+            	<div class="form-group">
+					hh:mm:ss&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="number" min="0" max="23" placeholder="h" formControlName="hour" required>&nbsp;&nbsp;
+					<input type="number" min="0" max="59" placeholder="m" formControlName="min" required>&nbsp;&nbsp;
+					<input type="number" min="0" max="59" placeholder="s" formControlName="sec" required>
+				</div>
+			</div>
+			<div style="text-align: center;">
+        		<button type="submit" class="submit" [disabled]="!videoSelectionForm.valid">Submit</button>
+        	</div>
+    	</form>
+	</div>
+
+	<div class="grid-item-2">
+		<video width="360" height="270" controls>
+			<source src={{videoFilename}} type="video/mp4">
+		</video>
+	</div>

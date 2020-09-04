@@ -1,0 +1,51 @@
+<div class="modal-content">
+
+    <div class="modal-header" style="background-color: azure;">
+        <span class="modal-title">Add New Asset</span>
+    </div>
+
+    <div class="modal-body container" style="font-size: 9px;">
+        <form [formGroup]="assetAddForm" (ngSubmit)="addAsset()">
+        	<div class="form-group">
+            	<label class="col-sm-4">Shipping Doc Number</label>
+            	<input type="text" class="col-sm-7" placeholder="Shipping Doc Number" formControlName="id" required>
+            </div>
+          	<div class="form-group">
+                <label class="col-sm-4">Asset Type</label>
+                <input type="text" class="col-sm-7" placeholder="Asset Type" formControlName="type" required>
+            </div>
+          	<div class="form-group">
+            	<label class="col-sm-4">Length & Width</label>
+            	<input type="text" class="col-sm-3" placeholder="Length" formControlName="length" required>
+                <label class="col-sm-1"></label>
+            	<input type="text" class="col-sm-3" placeholder="Width" formControlName="width" required>
+          	</div>
+            <div class="form-group">
+                <label class="col-sm-4">Height & Weight</label>
+                <input type="text" class="col-sm-3" placeholder="Height" formControlName="height" required>
+                <label class="col-sm-1"></label>
+                <input type="text" class="col-sm-3" placeholder="Weight" formControlName="weight" required>
+            </div>
+          	<div class="form-group">
+                <label class="col-sm-4" style="color: darkgray;">Shipper (optional)</label>
+                <input type="text" class="col-sm-7" placeholder="Shipper" formControlName="shipper">
+            </div>
+            <div class="form-group">
+            	<label class="col-sm-4" style="color: darkgray;">Origin & Dest (optional)</label>
+            	<input type="text" class="col-sm-3" placeholder="Origin" formControlName="origin">
+                <label class="col-sm-1"></label>
+            	<input type="text" class="col-sm-3" placeholder="Destination" formControlName="destination">
+          	</div>
+          	<div class="row justify-content-around" style="margin-top: 9px;">
+                <button type="submit" class="btn btn-primary btn-sm" [disabled]="!assetAddForm.valid">Submit & Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" (click)="activeModal.close()">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer" style="background-color: lightgray;">
+    	
+    </div>
+
+</div>
+

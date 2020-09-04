@@ -1,0 +1,69 @@
+<div class="modal-content">
+
+    <div class="modal-header" style="background-color: azure;">
+        <span class="modal-title">Edit Driver {{driver.id}}</span>
+    </div>
+
+    <div class="modal-body container" style="font-size: 9px;">
+        <form [formGroup]="driverEditForm" (ngSubmit)="editDriver()">
+          	<div class="form-group">
+            	<label class="col-sm-4">First Name</label>
+            	<input type="text" class="col-sm-7" placeholder={{driver.firstName}} formControlName="firstName">
+            </div>
+            <div class="form-group">
+            	<label class="col-sm-4">Last Name</label>
+            	<input type="text" class="col-sm-7" placeholder={{driver.lastName}} formControlName="lastName">
+          	</div>
+          	<div class="form-group">
+            	<label class="col-sm-4">License Number & State</label>
+            	<input type="text" class="col-sm-3" placeholder={{driver.licenseNumber}} formControlName="licenseNumber">
+                <label class="col-sm-1"></label>
+            	<select class="col-sm-3" formControlName="licenseState">
+            		<option value={{driver.licenseState}} selected>{{driver.licenseState}}</option>
+            		<option *ngFor="let st of stateList" [value]="st">{{st}}</option>
+            	</select>
+          	</div>
+          	<div class="form-group">
+            	<label class="col-sm-4">Phone</label>
+            	<input type="tel" class="col-sm-7" placeholder={{driver.phone}} formControlName="phone">
+            </div>
+            <div class="form-group">
+            	<label class="col-sm-4">Email</label>
+            	<input type="email" class="col-sm-7" placeholder={{driver.email}} formControlName="email">
+          	</div>
+            <div class="form-group">
+                <label class="col-sm-4">ELD Exemption Status</label>
+                <label class="radio-inline">
+                    <input type="radio" name="eldExemptionStatus" value="non-exempt" formControlName="eldExemptionStatus" [checked]="driver.eldExemptionStatus == 'non-exempt'">
+                    &nbsp;&nbsp;Non-exempt&nbsp;&nbsp;
+                    <input type="radio" name="eldExemptionStatus" value="exempt" formControlName="eldExemptionStatus" [checked]="driver.eldExemptionStatus == 'exempt'">
+                    &nbsp;&nbsp;Exempt
+                </label>
+            </div>
+            <!--
+        	<div class="form-group">
+            	<label class="col-sm-3">ELD Exemption</label>
+            	<label class="col-sm-4">{{driver.eldExemptionStatus}}</label>
+            	<select class="col-sm-4" formControlName="eldExemptionStatus">
+            		<option value="" selected disabled>Choose</option>
+            		<option *ngFor="let st of eldExemptionStatusList" [value]="st">{{st}}</option>
+            	</select>
+          	</div>
+            -->
+          	<div class="form-group">
+            	<label class="col-sm-4">Photo Filename</label>
+            	<input type="text" class="col-sm-7" placeholder={{driver.pictureFileName}} formControlName="pictureFileName">
+          	</div>
+            <div class="row justify-content-around">
+                <button type="submit" class="btn btn-primary btn-sm" [disabled]="!driverEditForm.valid">Submit & Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" (click)="activeModal.close()">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer" style="background-color: lightgray;">
+    	
+    </div>
+
+</div>
+

@@ -1,0 +1,122 @@
+<div class="modal-content">
+
+    <div class="modal-header" style="background-color: azure;">
+        <span class="modal-title">Edit ELD Event {{eldEventSelected.seqNumber}} (ver. {{eldEventSelected.version}})</span>
+    </div>
+
+    <div class="modal-body container" style="font-size: 9px;">
+        <form [formGroup]="eldEventEditForm" (ngSubmit)="editEldEvent()">
+            <div class="form-group">
+                <label class="col-sm-4">Date & Time</label>
+                <label class="col-sm-7">{{eldEventSelected.dateStr}} {{eldEventSelected.timeStr}}</label>
+            </div>
+          	<div class="form-group">
+            	<label class="col-sm-4">Event Type</label>
+            	<select class="col-sm-5" formControlName="type">
+            		<option value="" selected disabled>Choose one</option>
+            		<option *ngFor="let t of typeList" [value]="t.val" [disabled]="t.val == eldEventSelected.type">{{t.val}}:{{t.desc}}</option>
+            	</select>
+            </div>
+            <ng-container *ngIf="eldEventEditForm.value.type == 1">
+            	<div class="form-group">
+            		<label class="col-sm-4">Event Code</label>
+            		<select class="col-sm-5" formControlName="code">
+            			<option value="" selected disabled>Choose one</option>
+            			<option *ngFor="let c of type1CodeList" [value]="c.val">{{c.val}}:{{c.desc}}</option>
+            		</select>
+            	</div>
+            </ng-container>
+            <ng-container *ngIf="eldEventEditForm.value.type == 2">
+            	<div class="form-group">
+            		<label class="col-sm-4">Event Code</label>
+            		<select class="col-sm-5" formControlName="code">
+            			<option value="" selected disabled>Choose one</option>
+            			<option *ngFor="let c of type2CodeList" [value]="c.val">{{c.val}}:{{c.desc}}</option>
+            		</select>
+            	</div>
+            </ng-container>
+            <ng-container *ngIf="eldEventEditForm.value.type == 3">
+            	<div class="form-group">
+            		<label class="col-sm-4">Event Code</label>
+            		<select class="col-sm-5" formControlName="code">
+            			<option value="" selected disabled>Choose one</option>
+            			<option *ngFor="let c of type3CodeList" [value]="c.val">{{c.val}}:{{c.desc}}</option>
+            		</select>
+            	</div>
+            </ng-container>
+            <ng-container *ngIf="eldEventEditForm.value.type == 4">
+            	<div class="form-group">
+            		<label class="col-sm-4">Event Code</label>
+            		<select class="col-sm-5" formControlName="code">
+            			<option value="" selected disabled>Choose one</option>
+            			<option *ngFor="let c of type4CodeList" [value]="c.val">{{c.val}}:{{c.desc}}</option>
+            		</select>
+            	</div>
+            </ng-container>
+            <ng-container *ngIf="eldEventEditForm.value.type == 5">
+            	<div class="form-group">
+            		<label class="col-sm-4">Event Code</label>
+            		<select class="col-sm-5" formControlName="code">
+            			<option value="" selected disabled>Choose one</option>
+            			<option *ngFor="let c of type5CodeList" [value]="c.val">{{c.val}}:{{c.desc}}</option>
+            		</select>
+            	</div>
+            </ng-container>
+            <ng-container *ngIf="eldEventEditForm.value.type == 6">
+            	<div class="form-group">
+            		<label class="col-sm-4">Event Code</label>
+            		<select class="col-sm-5" formControlName="code">
+            			<option value="" selected disabled>Choose one</option>
+            			<option *ngFor="let c of type6CodeList" [value]="c.val">{{c.val}}:{{c.desc}}</option>
+            		</select>
+            	</div>
+            </ng-container>
+            <ng-container *ngIf="eldEventEditForm.value.type == 7">
+            	<div class="form-group">
+            		<label class="col-sm-4">Event Code</label>
+            		<select class="col-sm-5" formControlName="code">
+            			<option value="" selected disabled>Choose one</option>
+            			<option *ngFor="let c of type7CodeList" [value]="c.val">{{c.val}}:{{c.desc}}</option>
+            		</select>
+            	</div>
+            </ng-container>
+            <div class="form-group">
+            	<label class="col-sm-4">Event Status</label>
+            	<select class="col-sm-5" formControlName="status">
+            		<option value="" selected disabled>Choose one</option>
+            		<option *ngFor="let s of statusList" [value]="s.val">{{s.val}}:{{s.desc}}</option>
+            	</select>
+            </div>
+            <div class="form-group">
+            	<label class="col-sm-4">Event Origin</label>
+            	<select class="col-sm-5" formControlName="origin">
+            		<option value="" selected disabled>Choose one</option>
+            		<option *ngFor="let o of originList" [value]="o.val" [disabled]="o.val == eldEventSelected.type">{{o.val}}:{{o.desc}}</option>
+            	</select>
+            </div>
+            <div class="form-group">
+            	<label class="col-sm-4">Location</label>
+            	<input type="text" class="col-sm-7" placeholder={{eldEventSelected.location}} formControlName="location">
+          	</div>
+          	<div class="form-group">
+            	<label class="col-sm-4">Vehicle Miles & Engine Hours</label>
+            	<input type="text" class="col-sm-3" placeholder={{eldEventSelected.vehicleMiles}} formControlName="vehicleMiles">
+            	<label class="col-sm-1"></label>
+            	<input type="text" class="col-sm-3" placeholder={{eldEventSelected.engineHours}} formControlName="engineHours">
+          	</div>
+          	<div class="form-group">
+            	<label class="col-sm-4">Comment</label>
+            	<input type="text" class="col-sm-7" placeholder={{eldEventSelected.comment}} formControlName="comment">
+          	</div>
+            
+            <div class="row justify-content-around">
+                <button type="done" class="btn btn-primary btn-sm" [disabled]="!eldEventEditForm.valid">Done</button>
+                <button type="cancel" class="btn btn-secondary btn-sm" (click)="activeModal.close()">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer" style="background-color: lightgray;">
+    </div>
+   
+</div>

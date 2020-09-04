@@ -1,0 +1,64 @@
+<div class="modal-content">
+
+	<div class="modal-header" style="background-color: azure;">
+    	<span class="modal-title">Driver {{driver.id}}</span>
+	</div>
+
+	<div class="modal-body" style="font-size: 9px;">
+		<table class="table table-condensed table-hover table-striped">
+			<tbody *ngIf="driver">
+				<tr>
+					<td>Driver Name</td>
+					<td>{{driver.firstName}} {{driver.lastName}}</td>
+				</tr>
+				<tr>
+					<td>License Number|State</td>
+					<td>{{driver.licenseNumber}}|{{driver.licenseState}}</td>
+				</tr>
+				<tr>
+					<td>Contact Phone|Email</td>
+					<td>{{driver.phone}}|{{driver.email}}</td>
+				</tr>
+				<tr>
+					<td>ELD Exemption Status</td>
+					<td>{{driver.eldExemptionStatus}}</td>
+				</tr>
+				<tr>
+					<td style="color: sienna;">&dagger; Signed-In Device</td>
+					<ng-container *ngIf="deviceIdMatched">
+						<td>{{deviceIdMatched}}</td>
+					</ng-container>
+					<ng-container *ngIf="!deviceIdMatched">
+						<td>None</td>
+					</ng-container>
+				</tr>
+				<tr>
+					<td style="color: sienna;">&dagger; Operated Vehicle</td>
+					<ng-container *ngIf="vehicleIdMatched">
+						<td>{{vehicleIdMatched.split(':')[1]}}</td>
+					</ng-container>
+					<ng-container *ngIf="!vehicleIdMatched">
+						<td>None</td>
+					</ng-container>
+				</tr>
+				<tr style="color: darkgray;">
+					<td>Record Created at|by</td>
+					<td>{{driver.createdAt}}|{{driver.createdBy}}</td>
+				</tr>
+				<tr style="color: darkgray;">
+					<td>Record Last Edited at|by</td>
+					<td>{{driver.editedAt}}|{{driver.editedBy}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<div *ngIf="pictureFilePath" style="top-margin: 24px; text-align: center;">
+			<img [src]="pictureFilePath" alt={{driver.lastName}} style="display: inline-block; width: 140px; height: auto;"><br>
+			<span style="color: darkgray;">{{pictureFilePath}}</span>
+		</div>
+	</div>
+	
+	<div class="modal-footer" style="background-color: lightgray;">
+
+	</div>
+
+</div>

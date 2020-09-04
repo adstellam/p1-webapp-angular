@@ -1,0 +1,143 @@
+<div class="grid-container">
+
+	<div class="grid-item-1">
+		<div class="header header-bluegreen">
+			Select VeDAS Devices
+		</div>
+		<div class="box box-azure">
+			<form [formGroup]="deviceSelectionForm" (ngSubmit)="onDeviceSelectionFormSubmitted()">
+				<div class="form-group">
+					<label>Device Id&nbsp;&nbsp;</label>
+					<input type="text" placeholder="Device Id" formControlName="id">
+				</div>
+            	<div style="text-align: center;">
+	        		<button type="submit" class="submit" [disabled]="!deviceSelectionForm.valid">Find</button>
+	        	</div>
+	    	</form>
+	    	<div style="height: 36px; line-height: 36px; text-align: center;">------------ or ------------</div>
+			<form [formGroup]="deviceFilterForm" (ngSubmit)="onDeviceFilterFormSubmitted()">
+				<div class="form-group">
+					<label>Uninstalled device only&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<input type="checkbox" (change)="setCheckboxFormControl($event.target.checked)">
+				</div>
+				<div class="form-group">
+					<label>Hardware version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<select formControlName="hardwareVersion">
+						<option value="" selected>Unspecified</option>
+                    	<option *ngFor="let ver of hardwareVersionList" [value]="ver">{{ver}}</option>
+					</select>
+				</div>
+            	<div style="text-align: center;">
+	        		<button type="submit" class="submit">Find</button>
+	        	</div>
+	    	</form>
+		</div>
+		<div class="header header-gray">
+			Selection|Filtering Criteria Entered
+		</div>
+		<div class="box box-azure">
+			<ng-container *ngIf="deviceSelectionForm.value.id">
+				Device Id: {{deviceSelectionForm.value.id}}<br>
+			</ng-container>
+			<ng-container *ngIf="!deviceSelectionForm.value.id">
+				Device Id: None entered<br>
+			</ng-container>
+			<ng-container *ngIf="deviceFilterForm.value.checkbox">
+				Uninstalled Device Only: checked<br>
+			</ng-container>
+			<ng-container *ngIf="!deviceFilterForm.value.checkbox">
+				Uninstalled Device Only: not checked<br>
+			</ng-container>
+			<ng-container *ngIf="deviceFilterForm.value.hardwareVersion">
+				Hardware Version: {{deviceFilterForm.value.hardwareVersion}}
+			</ng-container>
+			<ng-container *ngIf="!deviceFilterForm.value.hardwareVersion">
+				Hardware Version: None entered
+			</ng-container>
+		</div>
+	</div>
+
+	<div class="grid-item-2">	
+		<div class="header header-bluegreen" style="width: 90%;">
+			Selected Devices & Their Asssignment To Vehicles
+		</div>
+		<div class="table-responsive" style="width: 90%;">
+	        <table class="table table-condensed table-hover">
+	            <thead>
+	                <tr>
+	                    <td>Device Id</td>
+	                    <td>Hardware Version</td>
+	                    <td>Installed on Vehicle</td>
+	                    <td>Install/Transfer</td>
+	                    <td>Remove from Vehicle</td>
+	                </tr>
+	            </thead>
+	            <ng-container *ngIf="deviceSelected">
+	            	<tbody>
+	            		<tr>
+	            			<td>{{deviceSelected.id}}</td>
+		                    <td>{{deviceSelected.hardwareVersion}}</td>
+		                    <td>
+		                    	<ng-container *ngIf="deviceSelected.vehicleId">
+		                			{{deviceSelected.vehicleId.split(':')[1]}}
+		                		</ng-container>
+		                		<ng-container *ngIf="!deviceSelected.vehicleId">
+		                			Not Installed
+		                		</ng-container>
+		                	</td>
+		                	<td>
+		                		<ng-container *ngIf="deviceSelected.vehicleId">
+		                			<span class="button button-cyan" (click)="onDeviceTransferred(deviceSelected.id, deviceSelected.vehicleId)">Transfer</span>
+		                		</ng-container>
+		                		<ng-container *ngIf="!deviceSelected.vehicleId">
+		                			<span class="button button-violet" (click)="onDeviceInstalled(deviceSelected.id)">Install</span>
+		                		</ng-container>
+		                	</td>
+		                	<td>
+		                		<ng-container *ngIf="deviceSelected.vehicleId">
+		                			<span class="button button-cyan" (click)="onDeviceRemoved(deviceSelected.id, deviceSelected.vehicleId)">Remove</span>
+		                		</ng-container>
+		                		<ng-container *ngIf="!deviceSelected.vehicleId">
+		                			N/A
+		                		</ng-container>
+		                	</td>
+	            		</tr>
+	            	</tbody>
+	            </ng-container>
+	            <ng-container *ngIf="devicesFiltered">
+	            	<tbody>
+		                <tr *ngFor="let d of devicesFiltered">   
+		                    <td>{{d.id}}</td>
+		                    <td>{{d.hardwareVersion}}</td>
+		                    <td>
+		                    	<ng-container *ngIf="d.vehicleId">
+		                			{{d.vehicleId.split(':')[1]}}
+		                		</ng-container>
+		                		<ng-container *ngIf="!d.vehicleId">
+		                			Not Installed
+		                		</ng-container>
+		                	</td>
+		                	<td>
+		                		<ng-container *ngIf="d.vehicleId">
+		                			<span class="button button-cyan" (click)="onDeviceTransferred(d.id, d.vehicleId)">Transfer</span>
+		                		</ng-container>
+		                		<ng-container *ngIf="!d.vehicleId">
+		                			<span class="button button-violet" (click)="onDeviceInstalled(d.id)">Install</span>
+		                		</ng-container>
+		                	</td>
+		                	<td>
+		                		<ng-container *ngIf="d.vehicleId">
+		                			<span class="button button-cyan" (click)="onDeviceRemoved(d.id, d.vehicleId)">Remove</span>
+		                		</ng-container>
+	                			<ng-container *ngIf="!d.vehicleId">
+	                				N/A
+	                			</ng-container>
+	                		</td>
+		                </tr>
+	            	</tbody>
+	        	</ng-container>
+	        </table>
+	    </div>	
+	</div>
+
+</div>

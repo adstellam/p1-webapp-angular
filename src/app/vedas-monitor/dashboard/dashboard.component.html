@@ -1,0 +1,125 @@
+<div class="line line-colored">
+
+	<div class="line-segment line-segment-1">
+		<span class="box">VeDAS Id|Status</span>
+	</div>
+	<div class="line-segment line-segment-2">			
+		<span class="box">Vehicle Id|Status</span>
+	</div>
+	<div class="line-segment line-segment-3">
+		<span class="box">Driver Name|HoS|ELD Status</span>		
+	</div>
+	<div class="line-segment line-segment-4">
+		<span class="box">Speed & Geolocation|Map</span>
+	</div>
+	<div class="line-segment line-segment-5">
+		<span class="box">Risk Level & Message|Analytics</span>
+		<!--
+		<div class="dropdown-anchor">
+			<i class="material-icons icons">arrow_drop_down_circle</i>
+			<div class="dropdown-content">
+				<span class="dropdown-item" (click)="setVedasRiskLevelThreshold(0)">Show All</span>
+				<span class="dropdown-item" (click)="setVedasRiskLevelThreshold(1)">Show Moderate+ Risk</span>
+				<span class="dropdown-item" (click)="setVedasRiskLevelThreshold(2)">Show Medium+ Risk</span>
+				<span class="dropdown-item" (click)="setVedasRiskLevelThreshold(3)">Show High Risk Only</span>
+			</div>
+		</div>
+		-->
+	</div>
+	<div class="line-segment line-segment-6">
+		<span class="box">Video Player</span>
+	</div>
+			
+</div>
+
+
+<div *ngIf="deviceMap">
+	<ng-container *ngFor="let deviceId of deviceMap.keys()">
+		<ng-container *ngIf="vehicleMap && driverMap">
+			<app-device-line [deviceId]="deviceId"
+							 [rtdSubject]="rtdSubject"
+							 [hosSubject]="hosSubject"
+							 [device]="deviceMap.get(deviceId)"
+							 [vehicle]="deviceMap.get(deviceId).vehicleId ? vehicleMap.get(deviceMap.get(deviceId).vehicleId) : null"
+							 [driver]="deviceMap.get(deviceId).driverId ? driverMap.get(deviceMap.get(deviceId).driverId) : null"
+							 (deviceDetailClicked)="openDeviceDetailModal($event)" 
+							 (vehicleDetailClicked)="openVehicleDetailModal($event)" 
+							 (driverDetailClicked)="openDriverDetailModal($event)">
+			</app-device-line>
+		</ng-container>
+	</ng-container>	
+</div>
+
+<div class="line">
+
+	<div class="line-segment line-segment-1">
+		<span class="legend-button" placement="right" [ngbPopover]="popDeviceLegendContent">Legend</span>
+	</div>
+	<div class="line-segment line-segment-2">
+		<span class="legend-button" placement="bottom" [ngbPopover]="popVehicleLegendContent">Legend</span>
+	</div>
+	<div class="line-segment line-segment-3">
+		<span class="legend-button" placement="bottom" [ngbPopover]="popDriverLegendContent">Legend</span>
+	</div>
+	<div class="line-segment line-segment-4">
+	</div>
+	<div class="line-segment line-segment-5">
+		<span class="legend-button" placement="bottom" [ngbPopover]="popAnalyticsLegendContent">Legend</span>
+	</div>
+	<div class="line-segment line-segment-6">
+	</div>
+
+</div>
+
+<ng-template #popDeviceLegendContent>
+	<i class="material-icons icons">apps</i>
+	<span class="legend-desc">Clickable for detailed information of the device</span><br>
+	<i class="material-icons icons icons-primary">event_available</i>
+	<span class="legend-desc">[VeDAS status] Active </span><br>
+	<i class="material-icons icons icons-danger">event_busy</i>
+	<span class="legend-desc">[VeDAS status] Unreachable or malfunctioning</span>
+</ng-template>
+
+<ng-template #popVehicleLegendContent>
+	<i class="material-icons icons">local_shipping</i>
+	<span class="legend-desc">Clickable for detailed information of the vehicle</span><br>
+	<i class="material-icons icons icons-primary">sync</i>
+	<span class="legend-desc">[Vehicle status] Engine on</span><br>
+	<i class="material-icons icons icons-gray">indeterminate_check_box</i>
+	<span class="legend-desc">[Vehicle status] Engine off</span><br>
+	<i class="material-icons icons icons-secondary">error_outline</i>
+	<span class="legend-desc">[Vehicle status] Unknown: VeDAS device inactive</span>
+</ng-template>
+
+<ng-template #popDriverLegendContent>
+	<i class="material-icons icons">person</i>
+	<span class="legend-desc">Clickable for detailed information of the driver</span><br>
+	<i class="material-icons icons icons-gray">timer</i>
+	<span class="legend-desc">[ELD status] Driving</span><br>
+	<i class="material-icons icons icons-gray">timer_off</i>
+	<span class="legend-desc">[ELD status] On-duty not driving</span><br>
+	<i class="material-icons icons icons-gray">snooze</i>
+	<span class="legend-desc">[ELD status] Sleepberth</span><br>
+	<i class="material-icons icons icons-gray">work_off</i>
+	<span class="legend-desc">[ELD status] Off-duty</span><br>
+	<i class="material-icons icons icons-primary">check_circle</i>
+	<span class="legend-desc">[ELD compliance] Compliant with HOS rules</span><br>
+	<i class="material-icons icons icons-warning">warning</i>
+	<span class="legend-desc">[ELD compliance] Not in compliance with HOS rules</span><br>
+	<i class="material-icons icons icons-secondary">error_outline</i>
+	<span class="legend-desc">[ELD compliance] Unknpown: VeDAS device inactive</span>
+</ng-template>
+
+<ng-template #popAnalyticsLegendContent>
+	<i class="material-icons icons icons-danger">trip_origin</i>
+	<span class="legend-desc">[Risk level] High</span><br>
+	<i class="material-icons icons icons-alert">trip_origin</i>
+	<span class="legend-desc">[Risk level] Moderate</span><br>
+	<i class="material-icons icons icons-primary">trip_origin</i>
+	<span class="legend-desc">[Risk level] Low</span><br>
+	<i class="material-icons icons icons-secondary">error_outline</i>
+	<span class="legend-desc">[Risk level] Unknown: VeDAS device inactive</span>
+</ng-template>
+
+
+

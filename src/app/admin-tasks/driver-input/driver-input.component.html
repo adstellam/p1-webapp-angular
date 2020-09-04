@@ -1,0 +1,90 @@
+<div *ngIf="isDriver else nonDriverMsgDisplay" class="grid-container">
+	
+	<div class="header-cell">
+		<span>ELD Status of Driver: {{driverId}}|{{driver.firstName}} {{driver.lastName}}</span>
+	</div>
+	
+	<div class="content-cell">
+		<div class="heading">As Primary Driver</div>
+		<ng-container *ngIf="driverStatus">
+			<ng-container *ngIf="driverStatus.signedIn && deviceIdForDriver">
+				<div class="content" >Signed in [Device: {{deviceIdForDriver}}]</div>
+				<div class="button-area"><span class="button" (click)="onDriverSignout()">Sign Out</span></div>
+			</ng-container>
+			<ng-container *ngIf="!driverStatus.signedIn">
+				<div class="content" >Not signed in</div>
+				<div class="button-area"><span class="button" (click)="onDriverSignin()">Sign In</span></div>
+			</ng-container>
+		</ng-container>
+	</div>
+
+	<div class="content-cell">
+		<div class="heading" [ngClass]="{ 'heading-inactive': driverStatus.signedIn }">As Co-Driver</div>
+		<ng-container *ngIf="driverStatus">
+			<ng-container *ngIf="driverStatus.signedInAsCodriver && deviceIdForCodriver">
+				<div class="content" >Signed in [Device: {{deviceIdForCodriver}}]</div>
+				<div class="button-area"><span class="button" (click)="onCodriverSignout()">Sign Out</span></div>
+			</ng-container>
+			<ng-container *ngIf="!driverStatus.signedInAsCodriver">
+				<div class="content" >Not signed in</div>
+				<div class="button-area"><span class="button" (click)="onCodriverSignin()" [ngClass]="{ 'button-disabled': driverStatus.signedIn }">Sign In</span></div>
+			</ng-container>
+		</ng-container>
+	</div>
+
+	<div class="content-cell">
+		<div class="heading" [ngClass]="{ 'heading-inactive': !driverStatus.signedIn }">Driver Duty Status</div>
+		<ng-container *ngIf="driverStatus">
+			<ng-container *ngIf="driverStatus.dutyStatus == '1'">
+				<div class="content">Off-duty</div>
+			</ng-container>
+			<ng-container *ngIf="driverStatus.dutyStatus == '2'">
+				<div class="content">SB</div>
+			</ng-container>
+			<ng-container *ngIf="driverStatus.dutyStatus == '3'">
+				<div class="content">Driving</div>
+			</ng-container>
+			<ng-container *ngIf="driverStatus.dutyStatus == '4'">
+				<div class="content">On-duty not driving</div>
+			</ng-container>
+			<div class="button-area"><span class="button" (click)="onDriverDutyStatusChange()" [ngClass]="{ 'button-disabled': !driverStatus.signedIn }">Change</span></div>
+		</ng-container>
+	</div>
+
+	<div class="content-cell">
+		<div class="heading" [ngClass]="{ 'heading-inactive': !driverStatus.signedIn }">Driver Intent Indication</div>
+		<ng-container *ngIf="driverStatus">
+			<ng-container *ngIf="driverStatus.intentIndication == '1'">
+				<div class="content">Personal use</div>
+			</ng-container>
+			<ng-container *ngIf="driverStatus.intentIndication == '2'">
+				<div class="content">Yard move</div>
+			</ng-container>
+			<ng-container *ngIf="driverStatus.intentIndication == '3'">
+				<div class="content">No intent indication</div>
+			</ng-container>
+			<div class="button-area"><span class="button" (click)="onDriverIntentIndicationChange()" [ngClass]="{ 'button-disabled': !driverStatus.signedIn }">Change</span></div>
+		</ng-container>
+	</div>
+
+	<div class="content-cell">
+		<div class="heading">Assuming Unauthenticated Driver Profile</div>
+		<div class="content">Assume unauthenticated driver profile(s).</div>
+		<div class="button-area"><span class="button" (click)="onUnauthenticatedDriverProfileAssumption()">Assume</span></div>
+	</div>
+
+</div>
+
+<ng-template #nonDriverMsgDisplay>
+	<div style="width: 50%; margin: auto; border: solid 1px darkgray;">
+		<div style="margin-top: 48px; margin-bottom: 48px; text-align: center;">
+			<span style="font-size: 10px;">This page is for driver only. For demo purpose, please select the id of a driver whose role you want to assume.</span><br><br>
+			<select style="font-size: 10px;" [formControl]="driverIdFormControl">
+				<option value="" selected disabled>Select one</option>
+                <option *ngFor="let e of drivers" [value]="e.id">{{e.id}}</option>
+			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="button button-120 button-cyan" (click)="proceedAsDriver(driverIdFormControl.value)">Proceed</span>
+		</div>
+	</div>
+<ng-template>
+

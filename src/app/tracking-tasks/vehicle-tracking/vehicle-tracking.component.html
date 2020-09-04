@@ -1,0 +1,50 @@
+<div class="grid-container">
+
+	<div class="grid-item-1">
+		<div class="header header-gray">
+			Select Vehicle
+		</div>
+		<div class="box box-azure" style="text-align: center;">
+			<ng-container *ngIf="vehicles">
+				<select [formControl]="vehicleIdFormControl">
+					<option value="" selected disabled>Choose one</option>
+		            <option *ngFor="let v of vehicles" value={{v.id}}>{{v.id}}|{{v.make}} {{v.model}}-{{v.year}}</option>
+		        </select>
+		    	<button class="submit" (click)="getInfo()">Apply</button>
+		    </ng-container>
+		</div>
+		<div class="header header-gray">
+			Select Desired Path Duration
+		</div>
+		<div class="box box-azure" style="text-align: center;">
+			<select [formControl]="pathDurationFormControl">
+	            <option *ngFor="let hr of hourList" value={{hr}}>{{hr}} hr</option>
+	        </select>
+	        <button class="submit" (click)="getPath()">Apply</button>
+		</div>
+		<div class="header header-bluegreen">
+			Vehicle & Driver Information
+		</div>
+		<div class="box box-azure">
+			Vehicle Id|Desc: {{vehicleId.split(':')[1]}}|{{vehicleDesc}}<br>
+			Driver Id|Name: {{driverId}}|{{driverName}}<br>
+			Power Unit Number: {{powerUnitNumber}}<br>
+			Trailer Number(s): {{trailerNumber}}<br>
+			Shipping Docs: {{shippingDocNumber}}
+		</div>
+		<div class="header header-magenta">
+			Real-Time Telematics
+		</div>
+		<div class="box box-lavender">
+			Speed: {{speed}}<br>
+			Location: {{location}}
+		</div>
+	</div>
+
+	
+	<div *ngIf="deviceId" class="grid-item-2">
+		<app-map [deviceId]="deviceId" [cid]="cid" [pathDuration]="pathDuration"></app-map>
+	</div>
+
+</div>
+

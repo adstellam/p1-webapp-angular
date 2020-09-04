@@ -1,0 +1,17 @@
+<div class="modal-content">
+    <div class="modal-header" style="background-color: azure;">
+        <span class="modal-title">Select new duty status</span>
+    </div>
+	<div class="modal-body container" style="font-size: 9px;">
+    	<ng-container *ngFor="let dutyStatus of dutyStatusList">
+            <input type="radio" name="dutyStatus" [value]="dutyStatus.val" [formControl]="dutyStatusFormControl">
+            <label>&nbsp;&nbsp;&nbsp;{{dutyStatus.desc}}</label><br>
+        </ng-container>
+        <div class="row justify-content-around">
+            <span class="button button-blue" (click)="onDutyStatusSelected(dutyStatusFormControl.value)" [ngClass]="{ 'button-disabled': !dutyStatusFormControl.value }">Done</span>
+            <span class="button button-gray" (click)="activeModal.close()">Cancel</span>
+        </div>
+    </div>
+    <div class="modal-footer" style="background-color: lightgray;">
+    </div>
+</div>

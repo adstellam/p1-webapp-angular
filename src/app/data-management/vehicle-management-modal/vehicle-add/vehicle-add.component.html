@@ -1,0 +1,54 @@
+<div class="modal-content">
+
+    <div class="modal-header" style="background-color: azure;">
+        <span class="modal-title">Add New Vehicle</span>
+    </div>
+
+    <div class="modal-body container" style="font-size: 9px;">
+        <form [formGroup]="vehicleAddForm" (ngSubmit)="addVehicle()">
+        	<div class="form-group">
+            	<label class="col-sm-4">Vehicle Id</label>
+            	<input type="text" class="col-sm-7" placeholder="Vehicle Id" formControlName="id" required>
+          	</div>
+          	<div class="form-group">
+            	<label class="col-sm-4">VIN</label>
+            	<input type="text" class="col-sm-7" placeholder="VIN" formControlName="vin" required>
+          	</div>
+          	<div class="form-group">
+                <label class="col-sm-4">Power Unit Number</label>
+                <input type="text" class="col-sm-7" placeholder="Power Unit Number" formControlName="powerUnitNumber" required>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4">Miles at MIL Clear</label>
+                <input type="text" class="col-sm-7" placeholder="Miles at MIL clearance" formControlName="milesAtMilClear" required>
+            </div>
+            <div class="form-group">
+            	<label class="col-sm-4" style="color: darkgray;">Make (optional)</label>
+            	<input type="text" class="col-sm-3" placeholder="Make" formControlName="make">
+          	</div>
+          	<div class="form-group">
+            	<label class="col-sm-4" style="color: darkgray;">Model & Year (optional)</label>
+            	<input type="text" class="col-sm-3" placeholder="Model" formControlName="model">
+                <label class="col-sm-1"></label>
+                <select class="col-sm-3" formControlName="year">
+                    <option value="" selected disabled>Choose One</option>
+                    <option *ngFor="let yr of yearList" [value]="yr">{{yr}}</option>
+                </select>
+          	</div>
+            <div class="form-group">
+            	<label class="col-sm-4" style="color: darkgray;">Trailer Number(s) (optional)</label>
+            	<input type="text" class="col-sm-7" placeholder="If multiple values, separate by comma" formControlName="trailerNumber">
+          	</div>
+            <div class="row justify-content-around">
+                <button type="submit" class="btn btn-primary btn-sm" [disabled]="!vehicleAddForm.valid">Submit & Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" (click)="activeModal.close()">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer" style="background-color: lightgray;">
+    	
+    </div>
+
+</div>
+

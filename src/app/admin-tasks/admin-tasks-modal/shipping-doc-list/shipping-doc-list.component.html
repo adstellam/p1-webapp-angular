@@ -1,0 +1,30 @@
+<div class="modal-content">
+    <div class="modal-header" style="background-color: azure;">
+        <span class="modal-title">Assets on Vehicle {{vehicleId}}</span>
+    </div>
+	<div class="modal-body" style="font-size: 9px;">
+    	<div class="table-responsive" style="width: 90%;">
+            <table class="table table-condensed table-hover">
+                <thead class="header">
+                    <tr>
+                        <td>Shipping Doc Number</td>
+                        <td>Type</td>
+                        <td>Size (L x W x H)</td>
+                        <td>Weight</td>
+                        <td>Destination</td>
+                    </tr>
+                </thead>
+                <tbody *ngIf="vehicleMap && assetMap" >
+                    <tr *ngFor="let assetId of vehicleMap.get(vehicleId).shippingDocNumber">   
+                        <td>{{assetId}}</td>
+                        <td>{{assetMap.get(assetId).type}}</td>
+                        <td>{{assetMap.get(assetId).length}} x {{assetMap.get(assetId).width}} x {{assetMap.get(assetId).height}}</td>
+                        <td>{{assetMap.get(assetId).weight}}</td>
+                        <td>{{assetMap.get(assetId).destination}}</td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+    <div class="modal-footer" style="background-color: lightgray;">
+    </div>
+</div>

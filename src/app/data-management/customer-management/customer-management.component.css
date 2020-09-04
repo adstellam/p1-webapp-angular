@@ -1,0 +1,169 @@
+.grid-container {
+	display: grid;
+	width: 80%;
+	margin-left: 32px;
+	grid-template-columns: 160px 600px 160px;
+	grid-template-rows: 26px auto;
+	grid-column-gap: 8px;
+	grid-row-gap: 16px;
+}
+
+.grid-item-11 {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	height: 32px;
+	background-color: #34cceb;
+	font-size: 9px;
+}
+
+.grid-item-12 {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	height: 32px;
+	background-color: #34cceb;
+}
+
+.grid-item-13 {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	height: 32px;
+	background-color: #34cceb;
+}
+
+.grid-item-21 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.grid-item-22 {
+	display: flex;
+	justify-content: center;
+}
+
+.grid-item-23 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.header {
+	display: inline-block;
+	font-size: 10px;
+	padding: 0 6px;
+}
+
+.image {
+	opacity: 0.9;
+}
+
+.button {
+	display: inline-block;
+	padding: 3px;
+	border: none;
+	font-size: 9px;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.button-60 {
+	width: 60px;
+}
+
+.button-90 {
+	width: 90px;
+}
+
+.button-blue {
+	background-color: blue;
+}
+
+.button-green {
+	background-color: lightseagreen;
+}
+
+.button-purple {
+	background-color: mediumpurple;
+}
+
+.button-add {
+	height: 28px; 
+	padding-top: 6px;
+	border: solid 1px blue;
+}
+
+.button-refresh {
+	height: 28px; 
+	padding-top: 6px;
+	vertical-align: middle;
+	color: darkslateblue; 
+	border: solid 1px darkslateblue;
+}
+
+.image {
+	opacity: 0.9;
+}
+
+.button {
+	display: inline-block;
+	padding: 3px;
+	border: none;
+	font-size: 9px;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.button-60 {
+	width: 60px;
+}
+
+.button-90 {
+	width: 90px;
+}
+
+.button-blue {
+	background-color: blue;
+}
+
+.button-green {
+	background-color: lightseagreen;
+}
+
+.button-purple {
+	background-color: mediumpurple;
+}
+
+.button-add {
+	height: 28px; 
+	padding-top: 6px;
+	background-color: darkslateblue;
+	border: solid 1px darkslateblue;
+}
+
+.button-refresh {
+	height: 28px; 
+	padding-top: 6px;
+	vertical-align: middle;
+	color: darkslateblue; 
+	border: solid 1px darkslateblue;
+}
+
+thead {
+	color: #ffffff;
+	background-color: darkslateblue;
+}
+
+td {
+	font-size: 9px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	text-align: center;
+	vertical-align: middle;
+}

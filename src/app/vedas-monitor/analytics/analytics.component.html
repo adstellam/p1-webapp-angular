@@ -1,0 +1,70 @@
+<div class="grid-container">
+
+	<div class="grid-item-1">
+		<div class="header header-bluegreen">
+			Select Charts To Show
+		</div>
+		<div class="box box-azure">
+			<form [formGroup]="chartSelectionForm" (ngSubmit)="onChartSelectionSubmitted()">
+				<label>
+					<input type="checkbox" (change)="setChartsFormArray('aec', $event.target.checked)" checked>
+					&nbsp;&nbsp;Aberrant Eye Closure (AEC)
+				</label><br>
+				<label>
+					<input type="checkbox" (change)="setChartsFormArray('ihp', $event.target.checked)" checked>
+					&nbsp;&nbsp;Inattentive Head Pose (IHP)
+				</label><br>
+				<label>
+					<input type="checkbox" (change)="setChartsFormArray('dla', $event.target.checked)" checked>
+					&nbsp;&nbsp;Digressive Lane Align (DLA)
+				</label><br>
+				<label>
+					<input type="checkbox" (change)="setChartsFormArray('spd', $event.target.checked)" checked>
+					&nbsp;&nbsp;Vehicle Speed (SPD)
+				</label>
+				<div style="text-align: center;">
+	        		<button type="submit" class="submit">Submit</button>
+	        	</div>
+	    	</form>
+	    </div>
+	    <div class="header header-bluegreen">
+	    	Adjust Sensitivity of Measures
+	    </div>
+	    <div class="box box-azure">
+			<form [formGroup]="sensitivitySettingForm" (ngSubmit)="onSensitivitySettingFormSubmitted()">
+				<div *ngIf="chartSelected.includes('aec')" class="form-group">
+					<label>AEC (default: 20%)&nbsp;&nbsp;</label>
+					<input type="range" min="10" max="30" value="20" formControlName="aec">
+				</div>
+				<div *ngIf="chartSelected.includes('ihp')" class="form-group">
+					<label>IHP (default: 30&deg;)&nbsp;&nbsp;</label>
+					<input type="range" min="15" max="45" value="30" formControlName="ihp">
+				</div>
+				<div *ngIf="chartSelected.includes('dla')" class="form-group">
+					<label>DLA (default: 25%)&nbsp;&nbsp;</label>
+					<input type="range" min="20" max="30" value="25" formControlName="dla">
+				</div>
+				<div style="text-align: center;">
+	        		<button type="submit" class="submit">Apply</button>
+	        	</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="grid-item-2">
+		<div *ngIf="chartSelected.includes('aec')">
+			<app-chart [deviceId]="deviceId" chartType="line" [query]="queryAec" title="Aberrant Eye Closure"></app-chart>
+		</div>
+		<div *ngIf="chartSelected.includes('ihp')">
+			<app-chart [deviceId]="deviceId" chartType="line" [query]="queryIhp" title="Inattentive Head Pose"></app-chart>
+		</div>
+		<div *ngIf="chartSelected.includes('dla')">
+			<app-chart [deviceId]="deviceId" chartType="line" [query]="queryDla" title="Digressive Lane Align"></app-chart>
+		</div>
+		<div *ngIf="chartSelected.includes('spd')" >
+			<app-chart [deviceId]="deviceId" chartType="line" [query]="querySpd" title="Vehicle Speed"></app-chart>
+		</div>
+	</div>
+
+</div>
+

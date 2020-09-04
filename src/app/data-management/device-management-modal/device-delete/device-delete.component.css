@@ -1,0 +1,18 @@
+.button {
+	display: inline-block;
+	width: 80px;
+	padding: 4px 4px;
+	text-align: center;
+	font-size: 9px;
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.button-confirm {
+	background-color: blue;
+}
+
+.button-cancel {
+	background-color: red;
+}

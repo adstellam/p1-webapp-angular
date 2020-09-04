@@ -1,0 +1,131 @@
+<div class="grid-container">
+
+	<div class="grid-item-1">
+		
+		<div class="header header-bluegreen">
+			Select Video Cams To Connect
+		</div>
+		<div class="box box-azure">
+			<form [formGroup]="videoSelectionForm" (ngSubmit)="onVideoSelectionSubmitted()">
+				<label>
+					<input type="checkbox" (change)="setVideosFormArray('fwd', $event.target.checked)" checked>
+					&nbsp;&nbsp;Forward View
+				</label><br>
+				<label>
+					<input type="checkbox" (change)="setVideosFormArray('cab', $event.target.checked)" checked>
+					&nbsp;&nbsp;Cabin View
+				</label><br>
+				<label [ngClass]="{ 'inactive-selection': !peripherals.includes('aux-vid-1') }">
+					<input type="checkbox" (change)="setVideosFormArray('aux1', $event.target.checked)" [disabled]="!peripherals.includes('aux-vid-1')">
+					&nbsp;&nbsp;Auxiliary View 1
+				</label><br>
+				<label [ngClass]="{ 'inactive-selection': !peripherals.includes('aux-vid-2') }">
+					<input type="checkbox" (change)="setVideosFormArray('aux2', $event.target.checked)" [disabled]="!peripherals.includes('aux-vid-2')">
+					&nbsp;&nbsp;Auxiliary View 2
+				</label><br>
+				<label [ngClass]="{ 'inactive-selection': !peripherals.includes('aux-vid-3') }">
+					<input type="checkbox" (change)="setVideosFormArray('aux3', $event.target.checked)" [disabled]="!peripherals.includes('aux-vid-3')">
+					&nbsp;&nbsp;Auxiliary View 3
+				</label>
+				<div style="text-align: center;">
+	        		<button type="submit" class="submit">Submit</button>
+	        	</div>
+	    	</form>
+	    </div>
+	    <div class="header header-magenta">
+			Real-Time Telematics
+		</div>
+		<div class="box box-lavender">
+			Speed: {{rtd.spd}}<br>
+			Location: {{rtd.loc}}<br>
+			Risk Level: {{rtd.riskLevel}}<br>
+			Alert Message: {{rtd.alertMsg}}
+		</div>
+
+	</div>
+
+	<div class="grid-item-2">
+		
+		<div *ngIf="videoSelected.includes('fwd')" class="video-area">
+			<div class="video-title" style="width: 360px;">
+				Foward View (Live)
+			</div>
+			<canvas #canvasFwd width="360" height="270" class="canvas"></canvas>
+			<div class="video-supplemental-data" style="width: 360px;">
+				Vehicle Desc: {{vehicleDesc}}<br>
+				Speed & Location: {{rtd.spd}} mph @ {{rtd.loc}}
+			</div>
+			<div class="video-footer" style="width: 360px;">
+				<button class="btn" (click)="play('fwd')"><i class="material-icons icons">play_circle_outline</i>Play</button>
+				<button class="btn" (click)="pause('fwd')"><i class="material-icons icons">pause_circle_outline</i>Pause</button>
+				<button class="btn" (click)="stop('fwd')"><i class="material-icons icons">stop</i>Stop </button>
+			</div>
+		</div>
+		
+		<div *ngIf="videoSelected.includes('cab')" class="video-area">
+			<div class= "video-title" style="width: 360px;">
+				Cabin View (Live)
+			</div>
+			<canvas #canvasCab width="360" height="270" class="canvas"></canvas>
+			<div class="video-supplemental-data" style="width: 360px;">
+				Drive Name: {{driverName}}<br>
+				VeDAS Analytics: {{rtd.alertMsg}} | Risk Level: {{rtd.riskLevel}}
+			</div>
+			<div class="video-footer" style="width: 360px;">
+				<button class="btn" (click)="play('cab')"><i class="material-icons icons">play_circle_outline</i>Play</button>
+				<button class="btn" (click)="pause('cab')"><i class="material-icons icons">pause_circle_outline</i>Pause</button>
+				<button class="btn" (click)="stop('cab')"><i class="material-icons icons">stop</i>Stop </button>
+			</div>
+		</div>
+
+		<div *ngIf="videoSelected.includes('aux1')" class="video-area">
+			<div class="video-title" style="width: 360px">
+				Auxiliary View 1 (Live)
+			</div>
+			<canvas #canvasAux1 width="360" height="270" class="canvas"></canvas>
+			<div class="video-supplemental-data" style="width: 360px;">
+				Direction: Backward View<br>
+				Description: None
+			</div>
+			<div class= "video-footer" style="width: 360px;">
+				<button class="btn" (click)="play('aux1')"><i class="material-icons icons">play_circle_outline</i>Play</button>
+				<button class="btn" (click)="pause('aux1')"><i class="material-icons icons">pause_circle_outline</i>Pause</button>
+				<button class="btn" (click)="stop('aux1')"><i class="material-icons icons">stop</i>Stop </button>
+			</div>
+		</div>
+
+		<div *ngIf="videoSelected.includes('aux2')" class="video-area">
+			<div class="video-title" style="width: 360px">
+				Auxiliary View 2 (Live)
+			</div>
+			<canvas #canvasAux2 width="360" height="270" class="canvas"></canvas>
+			<div class="video-supplemental-data" style="width: 360px;">
+				Direction: Left Side View<br>
+				Descrition: None
+			</div>
+			<div class= "video-footer" style="width: 360px;">
+				<button class="btn" (click)="play('aux2')"><i class="material-icons icons">play_circle_outline</i>Play</button>
+				<button class="btn" (click)="pause('aux2')"><i class="material-icons icons">pause_circle_outline</i>Pause</button>
+				<button class="btn" (click)="stop('aux2')"><i class="material-icons icons">stop</i>Stop </button>
+			</div>
+		</div>
+
+		<div *ngIf="videoSelected.includes('aux3')" class="video-area">
+			<div class="video-title" style="width: 360px">
+				Auxiliary View 3 (Live)
+			</div>
+			<canvas #canvasAux3 width="360" height="270" class="canvas"></canvas>
+			<div class="video-supplemental-data" style="width: 360px;">
+				Direction: Right Side View<br>
+				Description: None
+			</div>
+			<div class= "video-footer" style="width: 360px;">
+				<button class="btn" (click)="play('aux3')"><i class="material-icons icons">play_circle_outline</i>Play</button>
+				<button class="btn" (click)="pause('aux3')"><i class="material-icons icons">pause_circle_outline</i>Pause</button>
+				<button class="btn" (click)="stop('aux3')"><i class="material-icons icons">stop</i>Stop </button>
+			</div>
+		</div>
+
+	</div>
+
+</div>

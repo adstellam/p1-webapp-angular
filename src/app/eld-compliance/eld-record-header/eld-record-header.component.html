@@ -1,0 +1,141 @@
+<div class="buttons-container">
+    <button class="button button-c"><i class="material-icons icons" style="color: darkmagenta;">stop</i>ELD Record Header</button>
+    <button class="button" (click)="switchTo('rods')">RODS<i class="material-icons icons">skip_next</i></button>
+    <button class="button" (click)="switchTo('supplement')">ELD Record Supplement<i class="material-icons icons">skip_next</i></button>
+</div>
+
+<div *ngFor="let deviceId of eldEventSeqMap.keys()" class="grid-container">
+
+	<div class="top-row" style="grid-column: 1 / span 6;">Device {{deviceId}} | {{eldRecordDate}} | ELD Record Header</div>
+
+	<div class="caption">Record Date</div>
+	<div class="caption">USDOT Number</div>
+	<div class="caption">Driver License Number</div>
+	<div class="caption">Driver License State</div>
+	<div class="caption">ELD Device Id</div>
+	<div class="caption">Trailer Id</div>
+
+	<div class="content">
+		{{eldRecordDate}}
+	</div>
+	<div class="content">
+		<ng-container *ngIf="customer">{{customer.dotNumber}}</ng-container>
+	</div>
+	<div class="content">
+		<ng-container *ngIf="driverMap">{{driverMap.get(driverId).licenseNumber}}</ng-container>
+	</div>
+	<div class="content">
+		<ng-container *ngIf="driverMap">{{driverMap.get(driverId).licenseState}}</ng-container>
+	</div>
+	<div class="content">
+		{{deviceId}}
+	</div>
+	<div class="content">
+		<ng-container *ngIf="headerDataMap && headerDataMap.get(deviceId).vehicleId && vehicleMap">
+			{{vehicleMap.get(headerDataMap.get(deviceId).vehicleId).trailerNumber}}
+		</ng-container>
+	</div>
+	
+	<div class="caption">Time Zone</div>
+	<div class="caption">Driver Name</div>
+	<div class="caption">Co-Driver Name</div>
+	<div class="caption">ELD Manufacturer</div>
+	<div class="caption">Shipping Id</div>
+	<div class="caption">Data Diagnostic Indicators</div>
+
+	<div class="content">
+		<ng-container *ngIf="customer">{{customer.timezone}}</ng-container>
+	</div>
+	<div class="content">
+		<ng-container *ngIf="driverMap">
+			{{driverMap.get(driverId).lastName}}, {{driverMap.get(driverId).firstName}}
+		</ng-container>
+	</div>
+	<div class="content">
+		<ng-container *ngIf="headerDataMap && headerDataMap.get(deviceId).codriverId && driverMap">
+			{{driverMap.get(headerDataMap.get(deviceId).codriverId).lastName}}, {{driverMap.get(headerDataMap.get(deviceId).codriverId).firstName}}
+		</ng-container>
+	</div>
+	<div class="content">
+		CV Squared Inc
+	</div>
+	<div class="content">
+		<ng-container *ngIf="headerDataMap && headerDataMap.get(deviceId).vehicleId && vehicleMap">
+			{{vehicleMap.get(headerDataMap.get(deviceId).vehicleId).shippingDocNumber}}
+		</ng-container>
+	</div>
+	<div class="content">
+		N/A
+	</div>
+
+	<div class="caption">24 Period Starting Time</div>
+	<div class="caption">Driver Id</div>
+	<div class="caption">Co-Driver Id</div>
+	<div class="caption">Tractor Id</div>
+	<div class="caption">Unidentified Driver Records</div>
+	<div class="caption">ELD Malfunction Indicators</div>
+
+	<div class="content">
+		<ng-container *ngIf="customer">{{customer.eldDayStart}}</ng-container>
+	</div>
+	<div class="content">
+		{{driverId}}
+	</div>
+	<div class="content">
+		<ng-container *ngIf="headerDataMap && headerDataMap.get(deviceId).codriverId">{{headerDataMap.get(deviceId).codriverId}}</ng-container>
+	</div>
+	<div class="content">
+		<ng-container *ngIf="headerDataMap && headerDataMap.get(deviceId).vehicleId && vehicleMap">
+			{{vehicleMap.get(headerDataMap.get(deviceId).vehicleId).powerUnitNumber}}
+		</ng-container>
+	</div>
+	<div class="content">
+		N/A
+	</div>
+	<div class="content">
+		N/A
+	</div>
+
+	<div class="caption">Carrier</div>
+	<div class="caption">Odometer Start-End</div>
+	<div class="caption">Miles Today</div>
+	<div class="caption">Tractor VIN</div>
+	<div class="caption">Exempt Driver Status</div>
+	<div class="caption">Engine Hours Start-End</div>
+
+	<div class="content">
+		<ng-container *ngIf="customer">{{customer.name}}</ng-container>
+	</div>
+	<div class="content">
+		<ng-container *ngIf="headerDataMap">
+			{{headerDataMap.get(deviceId).vmstart}}-{{headerDataMap.get(deviceId).vmend}}
+		</ng-container>
+	</div>
+	<div class="content">
+		<ng-container *ngIf="headerDataMap">
+			{{headerDataMap.get(deviceId).vmend - headerDataMap.get(deviceId).vmstart}}
+		</ng-container>
+	</div>
+	<div class="content">
+		<ng-container *ngIf="headerDataMap && headerDataMap.get(deviceId).vehicleId && vehicleMap">
+			{{vehicleMap.get(headerDataMap.get(deviceId).vehicleId).vin}}
+		</ng-container>
+	</div>
+	<div class="content">
+		<ng-container *ngIf="driverMap">{{driverMap.get(driverId).eldExemptionStatus}}</ng-container>
+	</div>
+	<div class="content">
+		<ng-container *ngIf="headerDataMap">
+			{{headerDataMap.get(deviceId).ehstart}}-{{headerDataMap.get(deviceId).ehend}}
+		</ng-container>
+	</div>
+
+	<div class="caption" style="grid-column: 1 / span 2;">Current Location</div>
+	<div class="caption" style="grid-column: 3 / span 3;">Comment</div>
+	<div class="caption" style="grid-column: 6 / span 1;">Print/Disply Date</div>
+
+	<div class="content" style="grid-column: 1 / span 2;">{{headerDataMap.get(deviceId).loc}}</div>
+	<div class="content" style="grid-column: 3 / span 3;">{{headerComment}}</div>
+	<div class="content" style="grid-column: 6 / span 1;">{{eldRecordPrintDisplayDate}}</div>
+
+</div>

@@ -1,0 +1,24 @@
+.button {
+	display: inline-block;
+	width: 80px;
+	padding: 4px 0;
+	border: none;
+	font-size: 9px;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.button-blue {
+	background-color: darkslateblue;
+}
+
+.button-gray {
+	background-color: gray;
+}
+
+.button-disabled {
+	opacity: 0.3;
+	pointer-events: none;
+}

@@ -1,0 +1,38 @@
+<div class="modal-content">
+
+	<div class="modal-header" style="background-color: azure;">
+    	<span class="modal-title">Vedas User {{vedasUser.id}}</span>
+	</div>
+
+	<div class="modal-body" style="font-size: 9px;">
+		<table class="table table-condensed table-hover table-striped">
+			<tbody *ngIf="vedasUser">
+				<tr>
+					<td>Name</td>
+					<td>{{vedasUser.firstName}} {{vedasUser.lastName}}</td>
+				</tr>
+				<tr>
+					<td>Role</td>
+					<td>{{vedasUser.role}}</td>
+				</tr>
+				<tr>
+					<td>Contact Phone|Email</td>
+					<td>{{vedasUser.phone}}|{{vedasUser.email}}</td>
+				</tr>
+				<tr style="color: darkgray;">
+					<td>Record Created at|by</td>
+					<td>{{vedasUser.createdAt}}|{{vedasUser.createdBy}}</td>
+				</tr>
+				<tr style="color: darkgray;">
+					<td>Record Last Edited at|by</td>
+					<td>{{vedasUser.editedAt}}|{{vedasUser.editedBy}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="modal-footer" style="background-color: lightgray;">
+
+	</div>
+
+</div>

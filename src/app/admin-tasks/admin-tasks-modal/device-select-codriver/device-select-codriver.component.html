@@ -1,0 +1,19 @@
+<div class="modal-content">
+    <div class="modal-header" style="background-color: azure;">
+        <span class="modal-title">Select device for co-driver sign-in</span>
+    </div>
+	<div *ngIf="deviceMap" class="modal-body container" style="font-size: 9px;">
+    	<ng-container *ngFor="let deviceId of deviceMap.keys()">
+            <ng-container *ngIf="!deviceMap.get(deviceId).codriverId">
+               <input type="radio" name="deviceId" [value]="deviceId" [formControl]="deviceIdFormControl">
+               <label>&nbsp;&nbsp;&nbsp;{{deviceId}}</label><br>
+            </ng-container>
+        </ng-container>
+        <div class="row justify-content-around">
+            <span class="button button-blue" (click)="onDeviceSelected(deviceIdFormControl.value)" [ngClass]="{ 'button-disabled': !deviceIdFormControl.value }">Sign In</span>
+            <span class="button button-gray" (click)="activeModal.close()">Cancel</span>
+        </div>
+    </div>
+    <div class="modal-footer" style="background-color: lightgray;">
+    </div>
+</div>

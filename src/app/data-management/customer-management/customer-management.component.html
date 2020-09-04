@@ -1,0 +1,83 @@
+<div class="grid-container">
+    
+    <div class="grid-item-11">
+        <span class="header">Edit customer data</span>
+    </div>
+
+    <div class="grid-item-12">
+        <span class="header">Showing current data</span>
+    </div>
+
+    <div class="grid-item-12">
+        <span class="header">To edit & refresh</span>
+    </div>
+
+    <div class="grid-item-21"> 
+    	<img src="../../../assets/customer/{{cid}}/{{customer.logoFileName}}" width="160" height="45">
+    </div>
+
+    <div class="grid-item-22">
+    	<div class="table-responsive" style="width: 90%;">
+	        <table class="table table-condensed table-hover">
+	            <thead>
+	                <tr>
+	                    <td>Data Item</td>
+	                    <td>Current Data Value</td>
+	                </tr>
+	            </thead>
+	            <tbody *ngIf="customer">
+	                <tr>   
+	                    <td>Customer Id</td>
+	                    <td>{{customer.id}}</td>
+	                </tr>
+	                <tr>
+	                	<td>Name</td>
+	                	<td>{{customer.name}}</td>
+	                </tr>
+	                <tr>
+	                	<td>USDOT Number</td>
+	                	<td>{{customer.dotNumber}}</td>
+	                </tr>
+	                <tr>
+	                	<td>Address</td>
+	                	<td>{{customer.streetAddress}} {{customer.city}} {{customer.state}} {{customer.zip}}</td>
+	                </tr>
+	                <tr>
+	                	<td>Contact Information</td>
+	                	<td>{{customer.phone}}|{{customer.email}}</td>
+	                </tr>
+	                <tr>
+	                	<td>Contact Person</td>
+	                	<td>{{customer.contactPerson}}</td>
+	                </tr>
+	                <tr>
+	                	<td>Customer Logo Filename</td>
+	                	<td>{{customer.logoFileName}}</td>
+	                </tr>
+	                <tr>
+	                	<td>Time Zone</td>
+	                	<td>{{customer.timezone}}</td>
+	                </tr>
+	                <tr>
+	                	<td>ELD Day Starts At</td>
+	                	<td>{{customer.eldDayStart}}</td>
+	                </tr>
+	                <tr style="color: gray;">
+	                	<td>Record Created At|By</td>
+	                	<td>{{customer.createdAt}}|{{customer.createdBy}}</td>
+	                </tr>
+	                <tr style="color: gray;">
+	                	<td>Record Last Edited At|By</td>
+	                	<td>{{customer.editedAt}}|{{customer.editedBy}}</td>
+	                </tr>
+	            </tbody>
+	        </table>
+	    </div>
+    </div>
+
+    <div class="grid-item-21"> 
+    	<span class="button button-90 button-add" (click)="openCustomerEditModal(customer.id)">Edit Data</span>
+    </div>
+
+</div>
+

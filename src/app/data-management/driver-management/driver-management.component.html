@@ -1,0 +1,39 @@
+<div class="grid-container">
+    
+    <div class="grid-item-11">
+        <span class="header">Manage Drivers</span>
+    </div>
+
+    <div class="grid-item-12">
+        <span class="header">To view, edit, or delete a particular driver</span>
+    </div>
+
+    <div class="grid-item-21"> 
+        <img src="../../../assets/img/drivers_img.png" width="160" height="120">
+        <span class="button button-100 button-palevioletred button-taller" (click)="openDriverAddModal(cid)">Add Driver</span>
+    </div>
+
+    <div class="grid-item-22 table-responsive"> 
+        <table class="table table-condensed table-hover">
+            <thead>
+                <tr>
+                    <td>Driver Id</td>
+                    <td>Name</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody *ngIf="driverMap">
+                <tr *ngFor="let driverId of driverMap.keys()">   
+                    <td style="background-color: lightgray;">{{driverId}}</td>
+                    <td>{{driverMap.get(driverId).firstName}} {{driverMap.get(driverId).lastName}}</td>
+                    <td>
+                        <span class="button button-60 button-cadetblue" (click)="openDriverDetailModal(driverId)">Detail</span>
+                        <span class="button button-60 button-cornflowerblue" (click)="openDriverEditModal(driverId)">Edit</span>
+                        <span class="button button-60 button-cornflowerblue" (click)="openDriverDeleteModal(driverId)">Delete</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

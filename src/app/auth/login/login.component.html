@@ -1,0 +1,19 @@
+<div class="imgcontainer">
+    <img src="../../../assets/img/Vedas_logo.png" alt="VeDAS logo" class="vedaslogo">
+</div>
+
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" name="uname" formControlName="username" placeholder="Enter Username" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" name="psw" formControlName="password" placeholder="Enter Password" required>
+
+        <button type="submit">Login</button>
+    </div>
+    <div class="flex-container" style="background-color:#f1f1f1">
+        <button type="button" class="cancelbtn" (click)="showReadMe()">Read Me</button>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+</form>

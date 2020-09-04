@@ -1,0 +1,135 @@
+.line {
+	display: flex;
+	width: 95%;
+	margin-left: 30px;
+	flex-flow: row wrap;
+	justify-content: space-around;
+}
+
+.line-colored {
+	height: 32px;
+	background-color: #34cceb;
+}
+
+.line-segment {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 10px;
+}
+
+.line-segment-1 {
+	width: 10%;
+}
+
+.line-segment-2 {
+	width: 10%;
+}
+
+.line-segment-3 {
+	width: 20%;
+}
+
+.line-segment-4 {
+	width: 25%;
+}
+
+.line-segment-5 {
+	width: 25%;
+}
+
+.line-segment-6 {
+	width: 10%;
+}
+
+.box {
+	display: inline-block;
+	padding: 4px 4px;
+	font-size: 10px;
+}
+
+.icons {
+	display: inline-block;
+	margin: 0 4px;
+	fill: currentColor;
+	font-size: 16px;
+	vertical-align: middle;
+}
+
+.icons-primary {
+	color: steelblue;
+}
+
+.icons-secondary {
+	color: lightpink;
+}
+
+.icons-alert {
+	color: orange;
+}
+
+.icons-warning {
+	color: orangered;
+}
+
+.icons-danger {
+	color: red;
+}
+
+.icons-gray {
+	color: gray;
+}
+
+.icons-translucent {
+	color: lightgray;
+}
+
+.legend-button {
+	display: inline-block;
+	margin-top: 16px;
+	padding: 4px 0;
+	border: none;
+	font-size: 8px;
+	background-color: mediumorchid;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	width: 80px;
+}
+
+.legend-desc {
+	display: inline-block;
+	padding: 0 12px;
+	font-size: 8px;
+}
+
+.dropdown-anchor {
+	display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #bdb0af;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-anchor:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  color: black;
+  padding: 4px 10px;
+  font-size: 9px;
+  text-decoration: none;
+  text-align: left;
+}
+
+.dropdown-content span:hover {
+	background-color: #8c8781;
+}

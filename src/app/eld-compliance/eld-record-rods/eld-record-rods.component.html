@@ -1,0 +1,48 @@
+<div class="buttons-container">
+    <button class="button" (click)="switchTo('header')"><i class="material-icons icons">skip_previous</i>ELD Record Header</button>
+    <button class="button button-c"><i class="material-icons icons" style="color: darkmagenta;">stop</i>RODS</button>
+    <button class="button" (click)="switchTo('supplement')">ELD Record Supplement<i class="material-icons icons">skip_next</i></button>
+</div>
+
+<div class="img-container">
+	<img src="../../../../assets/img/Rods_grid.png" width="60%">
+</div>
+
+<ng-container *ngIf="eldEventSeqMap">
+    <ng-container *ngFor="let deviceId of eldEventSeqMap.keys()">
+
+        <div class="table-container table-responsive">
+    	    <table class="table table-condensed table-hover">
+                <caption>Device {{deviceId}} | {{eldRecordDate}} | Change of Duty Status, Intervening Recording, and Change in Driver's Indication</caption>
+                <thead>
+                    <tr>
+                        <td>Time</td>
+                        <td>Event|Code</td>
+                        <td>Status</td>
+                        <td>Origin</td>
+                        <td>Location</td>
+                        <td>Odometer</td>
+                        <td>Engine Hrs</td>
+                        <td>Comment</td>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let eldEvent of eldEventSeqMap.get(deviceId)">   
+                    	<tr *ngIf="eldEvent.type == 1 || eldEvent.type == 2 || eldEvent.type == 3">
+                        	<td>{{eldEvent.timeStr}}</td>
+                        	<td>{{eldEvent.type}}|{{eldEvent.code}}</td>
+                        	<td>{{eldEvent.status}}</td>
+                        	<td>{{eldEvent.origin}}</td>
+                        	<td>{{eldEvent.location}}</td>
+                        	<td>{{eldEvent.vehicleMiles}}</td>
+                        	<td>{{eldEvent.engineHours}}</td>
+                        	<td>{{eldEvent.comment}}</td>
+                    	</tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    
+    </ng-container>
+</ng-container>

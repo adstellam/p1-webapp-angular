@@ -1,0 +1,84 @@
+<div class="modal-content">
+
+    <div class="modal-header" style="background-color: azure;">
+        <span class="modal-title">Edit Company Information {{id}}</span>
+    </div>
+
+    <div class="modal-body container" style="font-size: 9px;">
+        <form [formGroup]="customerEditForm" (ngSubmit)="editCustomer()">
+        	<div class="form-group">
+            	<label class="col-sm-3">Name</label>
+            	<label class="col-sm-4">{{customer.name}}</label>
+            	<input type="text" class="col-sm-4" placeholder="Enter new value" formControlName="name">
+            </div>
+            <div class="form-group">
+            	<label class="col-sm-3">USDOT Number</label>
+            	<label class="col-sm-4">{{customer.dotNumber}}</label>
+            	<input type="text" class="col-sm-4" placeholder="Enter new value" formControlName="dotNumber">
+          	</div>
+          	<div class="form-group">
+            	<label class="col-sm-3">Street Adress</label>
+            	<label class="col-sm-4">{{customer.streetAddress}}</label>
+            	<input type="text" class="col-sm-4" placeholder="Enter new value" formControlName="streetAddress">
+          	</div>
+          	<div class="form-group">
+            	<label class="col-sm-3">City</label>
+            	<label class="col-sm-4">{{customer.city}}</label>
+            	<input type="text" class="col-sm-4" placeholder="Enter new value" formControlName="city">
+            </div>
+            <div>
+            	<label class="col-sm-3">State|Zip Code</label>
+            	<label class="col-sm-4">{{customer.state}} {{customer.zip}}</label>
+            	<select class="col-sm-2" formControlName="state">
+            		<option value="" selected disabled>Choose</option>
+            		<option *ngFor="let st of stateList" [value]="st">{{st}}</option>
+            	</select>
+            	<input type="text" class="col-sm-2" placeholder="zip" formControlName="zip">
+            </div>
+            <div class="form-group">
+            	<label class="col-sm-3">Contact Phone</label>
+            	<label class="col-sm-4">{{customer.phone}}</label>
+            	<input type="tel" class="col-sm-4" placeholder="Enter new number" formControlName="phone">
+            </div>
+            <div class="form-group">
+            	<label class="col-sm-3">Contact Email</label>
+            	<label class="col-sm-4">{{customer.email}}</label>
+            	<input type="email" class="col-sm-4" placeholder="Enter new email" formControlName="email">
+          	</div>
+          	<div class="form-group">
+            	<label class="col-sm-3">Contact Person</label>
+            	<label class="col-sm-4">{{customer.contactPerson}}</label>
+            	<input type="text" class="col-sm-4" placeholder="Enter new name" formControlName="contactPerson">
+            </div>
+          	<div class="form-group">
+            	<label class="col-sm-3">Logo Filename</label>
+            	<label class="col-sm-4">{{customer.logoFileName}}</label>
+            	<input type="text" class="col-sm-4" placeholder="Enter new value" formControlName="logoFileName">
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3">Time Zone</label>
+                <label class="col-sm-4">{{customer.timezone}}</label>
+                <select class="col-sm-4" formControlName="timezone">
+                    <option value="" selected disabled>Choose</option>
+                    <option *ngFor="let tz of timezoneList" [value]="tz">{{tz}}</option>
+                </select>
+            </div><div class="form-group">
+            	<label class="col-sm-3">ELD Day Starts</label>
+            	<label class="col-sm-4">{{customer.eldDayStart}}</label>
+            	<select class="col-sm-4" formControlName="eldDayStart">
+            		<option value="" selected disabled>Choose one</option>
+            		<option *ngFor="let hr of hourList" [value]="hr">{{hr}}</option>
+            	</select>
+          	</div>
+            <div class="row justify-content-around">
+                <button type="submit" class="btn btn-primary btn-sm" [disabled]="!customerEditForm.valid">Submit & Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" (click)="activeModal.close()">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer" style="background-color: lightgray;">
+    	
+    </div>
+
+</div>

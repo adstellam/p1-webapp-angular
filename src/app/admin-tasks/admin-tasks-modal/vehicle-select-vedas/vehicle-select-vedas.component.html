@@ -1,0 +1,23 @@
+<div class="modal-content">
+    <div class="modal-header" style="background-color: azure;">
+        <span class="modal-title">Select vehicle</span>
+    </div>
+	<div *ngIf="vehicleMap" class="modal-body container" style="font-size: 9px;">
+    	<ng-container *ngFor="let vehicleId of vehicleMap.keys()">
+            <ng-container *ngIf="vehicleMap.get(vehicleId).deviceId">
+                <input type="radio" name="vehicleId" [value]="vehicleId" [formControl]="vehicleIdFormControl">
+                <label>&nbsp;&nbsp;&nbsp;{{vehicleId.split(':')[1]}} [currently equipped with device {{vehicleMap.get(vehicleId).deviceId}}]</label><br>
+            </ng-container>
+            <ng-container *ngIf="!vehicleMap.get(vehicleId).deviceId">
+                <input type="radio" name="vehicleId" [value]="vehicleId" [formControl]="vehicleIdFormControl">
+                <label>&nbsp;&nbsp;&nbsp;{{vehicleId.split(':')[1]}} [not equipped with any device]</label><br>
+            </ng-container>
+        </ng-container>
+        <div class="row justify-content-around">
+            <span class="button button-blue" (click)="onVehicleSelected(vehicleIdFormControl.value)" [ngClass]="{ 'button-disabled': !vehicleIdFormControl.value }">Done</span>
+            <span class="button button-gray" (click)="activeModal.close()">Cancel</span>
+        </div>
+    </div>
+    <div class="modal-footer" style="background-color: lightgray;">
+    </div>
+</div>

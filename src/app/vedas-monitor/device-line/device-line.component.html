@@ -1,0 +1,106 @@
+<div class="line">
+
+	<div class="line-segment line-segment-1">
+		<ng-container *ngIf="device">
+			<i class="material-icons icons" (click)="showDeviceDetail(device.id)">apps</i>
+			<span class="box box-80 box-honeydew">{{device.id}}
+				<ng-container *ngIf="!rtd"><i class="material-icons icons icons-danger">event_busy</i></ng-container>
+				<ng-container *ngIf="rtd && rtd.vedasOn"><i class="material-icons icons icons-primary">event_available</i></ng-container>
+				<ng-container *ngIf="rtd && !rtd.vedasOn"><i class="material-icons icons icons-danger">event_busy</i></ng-container>
+			</span>
+		</ng-container>
+	</div>
+
+	<div class="line-segment line-segment-2">
+		<ng-container *ngIf="vehicle else noVehicle">
+			<i class="material-icons icons" (click)="showVehicleDetail(vehicle.id)">local_shipping</i>
+			<span class="box box-80 box-honeydew">
+				{{vehicle.id.split(':')[1]}}	
+				<ng-container *ngIf="!rtd"><i class="material-icons icons icons-secondary">error_outline</i></ng-container>
+				<ng-container *ngIf="rtd && rtd.engineOn"><i class="material-icons icons icons-primary">sync</i></ng-container>
+				<ng-container *ngIf="rtd && !rtd.engineOn"><i class="material-icons icons icons-gray">indeterminate_check_box</i></ng-container>
+			</span>
+		</ng-container>
+		<ng-template #noVehicle>
+			<i class="material-icons icons">local_shipping</i>
+			<span class="box box-80 box-honeydew">N/A</span>
+		</ng-template>
+	</div>
+
+	<div class="line-segment line-segment-3">
+		<ng-container *ngIf="driver else noDriver">
+			<i class="material-icons icons" (click)="showDriverDetail(driver.id)">person</i>
+			<span class="box box-120 box-honeydew">
+				{{driver.firstName}} {{driver.lastName}}
+				<ng-container *ngIf="!rtd"><i class="material-icons icons icons-secondary">error_outline</i></ng-container>
+				<ng-container *ngIf="hos && hos.secHos <= 48*3600">
+					<i class="material-icons icons icons-primary">check_circle</i>
+					<span style="font-size: 7px; color: gray;">{{(hos.secHos/3600).toFixed(0)}}</span>
+				</ng-container>
+				<ng-container *ngIf="hos && hos.secHos > 48*3600">
+					<i class="material-icons icons icons-warning">warning</i>
+					<span style="font-size: 7px; color: orangered;">{{(hos.secHos/3600).toFixed(0)}}</span>
+				</ng-container>
+			</span>		
+			<span class="flex-box-bordered">	
+				<ng-container *ngIf="!hos || hos.dutyStatus != '3'"><i class="material-icons icons icons-translucent">timer</i></ng-container>
+				<ng-container *ngIf="hos && hos.dutyStatus == '3'"><i class="material-icons icons icons-gray">timer</i></ng-container>	
+				<ng-container *ngIf="!hos || hos.dutyStatus != '4'"><i class="material-icons icons icons-translucent" style="margin-left: -3px;">timer_off</i></ng-container>
+				<ng-container *ngIf="hos && hos.dutyStatus == '4'"><i class="material-icons icons icons-gray" style="margin-left: -3px;">timer_off</i></ng-container>
+				<ng-container *ngIf="!hos || hos.dutyStatus != '2'"><i class="material-icons icons icons-translucent" style="margin-left: -3px;">snooze</i></ng-container>
+				<ng-container *ngIf="hos && hos.dutyStatus == '2'"><i class="material-icons icons icons-gray" style="margin-left: -3px;">snooze</i></ng-container>
+				<ng-container *ngIf="!hos || hos.dutyStatus != '1'"><i class="material-icons icons icons-translucent" style="margin-left: -3px;">work_off</i></ng-container>
+				<ng-container *ngIf="hos && hos.dutyStatus == '1'"><i class="material-icons icons icons-gray" style="margin-left: -3px;">work_off</i></ng-container>	
+			</span>
+		</ng-container>
+		<ng-template #noDriver>
+			<i class="material-icons icons">person</i>
+			<span class="box box-120 box-honeydew">N/A</span>
+			<span class="flex-box-bordered">
+				<i class="material-icons icons icons-translucent">timer</i>
+				<i class="material-icons icons icons-translucent" style="margin-left: -4px;">timer_off</i>
+				<i class="material-icons icons icons-translucent" style="margin-left: -4px;">snooze</i>
+				<i class="material-icons icons icons-translucent" style="margin-left: -4px;">work_off</i>
+			</span>
+		</ng-template>
+	</div>
+
+	<div class="line-segment line-segment-4">
+		<ng-container *ngIf="rtd else noGeolocationData">
+			<span class="box box-200 box-lavender" style="padding: 5px 4px;">{{rtd.spd}} mph @{{rtd.loc}}</span>
+			<span class="button button-40 button-purple" (click)="showGeolocation(device.id)">Map</span>
+		</ng-container>
+		<ng-template #noGeolocationData>
+			<span class="box box-200 box-lavender" style="padding: 5px 4px;">Waiting for geolocation data</span>
+			<span class="button button-40 button-purple" (click)="showGeolocation(device.id)">Map</span>
+		</ng-template>
+	</div>
+
+	<div class="line-segment line-segment-5">
+		<div *ngIf="rtd else noVedasAnalyticsData">
+			<span class="box box-200 box-lavender">
+				<ng-container [ngSwitch]="rtd.riskLevel">
+					<ng-container *ngSwitchCase="'3'"><i class="material-icons icons icons-danger">trip_origin</i></ng-container>
+					<ng-container *ngSwitchCase="'2'"><i class="material-icons icons icons-warning">trip_origin</i></ng-container>
+					<ng-container *ngSwitchCase="'1'"><i class="material-icons icons icons-alert">trip_origin</i></ng-container>
+					<ng-container *ngSwitchCase="'0'"><i class="material-icons icons icons-primary">trip_origin</i></ng-container>
+				</ng-container>
+				{{rtd.alertMsg}}
+			</span>
+			<span class="button button-40 button-purple" (click)="showAnalytics(device.id)">Chart</span>
+		</div>
+		<ng-template #noVedasAnalyticsData>
+			<span class="box box-200 box-lavender">
+				Waiting for analytics data
+				<i class="material-icons icons icons-secondary">error_outline</i>
+			</span>
+			<span class="button button-40 button-purple" (click)="showAnalytics(device.id)">Chart</span>
+		</ng-template>
+	</div>
+
+	<div class="line-segment line-segment-6">
+		<span class="button button-60 button-video-play" (click)="showLiveVideo(device.id)"><i class="material-icons icons">videocam</i>Live</span>
+		<span class="button button-60 button-video-play" style="" (click)="showArchiveVideo(device.id)"><i class="material-icons icons">save</i>File</span>
+	</div>
+			
+</div>

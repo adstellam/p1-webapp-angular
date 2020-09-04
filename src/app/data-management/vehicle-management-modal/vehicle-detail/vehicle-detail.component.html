@@ -1,0 +1,59 @@
+<div class="modal-content">
+
+	<div class="modal-header" style="background-color: azure;">
+    	<span class="modal-title">Vehicle {{vehicle.id.split(':')[1]}}</span>
+	</div>
+
+	<div class="modal-body" style="font-size: 9px;">
+		<table class="table table-condensed table-hover table-striped">
+			<tbody *ngIf="vehicle">
+				<tr>
+					<td>VIN</td>
+					<td>{{vehicle.vin}}</td>
+				</tr>
+				<tr>
+					<td>Power Unit Number</td>
+					<td>{{vehicle.powerUnitNumber}}</td>
+				</tr>
+				<tr>
+					<td>Make, Model & Year</td>
+					<td>{{vehicle.make}} {{vehicle.model}} ({{vehicle.year}})</td>
+				</tr>
+				<tr>
+					<td>Miles at MIL Clear</td>
+					<td>{{vehicle.milesAtMilClear}}</td>
+				</tr>
+				<tr>
+					<td>TrailerNumber</td>
+					<td>{{vehicle.trailerNumber}}</td>
+				</tr>
+				<tr>
+					<td style="color: sienna;">&dagger; Shipping Docs</td>
+					<td>{{vehicle.shippingDocNumber}}</td>
+				</tr>
+				<tr>
+					<td style="color: sienna;">&dagger; Installed Device Id</td>
+					<ng-container *ngIf="vehicle.deviceId">
+						<td>{{vehicle.deviceId}}</td>
+					</ng-container>
+					<ng-container *ngIf="!vehicle.deviceId">
+						<td>Device not installed</td>
+					</ng-container>
+				</tr>
+				<tr style="color: darkgray;">
+					<td>Record Created at|by</td>
+					<td>{{vehicle.createdAt}}|{{vehicle.createdBy}}</td>
+				</tr>
+				<tr style="color: darkgray;">
+					<td>Record Last Edited at|by</td>
+					<td>{{vehicle.editedAt}}|{{vehicle.editedBy}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="modal-footer" style="background-color: lightgray;">
+
+	</div>
+
+</div>

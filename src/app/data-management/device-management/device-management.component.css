@@ -1,0 +1,102 @@
+.grid-container {
+	display: grid;
+	width: 80%;
+	margin-left: 32px;
+	grid-template-columns: 160px 640px;
+	grid-template-rows: 26px auto;
+	grid-column-gap: 16px;
+	grid-row-gap: 16px;
+}
+
+.grid-item-11 {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	height: 32px;
+	background-color: #34cceb;
+}
+
+.grid-item-12 {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	height: 32px;
+	background-color: #34cceb;
+}
+
+.grid-item-21 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.grid-item-22 {
+	display: block;
+}
+
+.header {
+	display: inline-block;
+	font-size: 10px;
+	padding: 0 6px;
+}
+
+.image {
+	opacity: 0.8;
+}
+
+.button {
+	display: inline-block;
+	margin-right: 12px;
+	padding: 3px;
+	border: none;
+	font-size: 9px;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.button-60 {
+	width: 60px;
+}
+
+.button-100 {
+	width: 100px;
+}
+
+.button-cadetblue {
+	background-color: cadetblue;
+}
+
+.button-cornflowerblue {
+	background-color: cornflowerblue;
+}
+
+.button-palevioletred {
+	background-color: palevioletred;
+}
+
+.button-green {
+	background-color: lightseagreen;
+}
+
+.button-taller {
+	height: 36px; 
+	padding-top: 10px;
+	margin-top: 16px;
+}
+
+thead {
+	color: #ffffff;
+	background-color: darkslateblue;
+}
+
+td {
+	font-size: 9px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	text-align: center;
+	vertical-align: middle;
+}
+

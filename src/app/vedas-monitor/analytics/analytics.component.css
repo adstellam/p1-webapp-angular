@@ -1,0 +1,131 @@
+.grid-container {
+	display: grid;
+	margin-left: 32px;
+	grid-template-columns: 1fr 4fr;
+	column-gap: 12px;
+}
+
+.grid-item-1 {
+	display: block;
+}
+
+.grid-item-2 {
+	display: block;
+}
+
+.header {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	height: 32px;
+	padding: 4px 6px;
+	font-size: 9px;
+	margin-bottom: 6px;
+}
+
+.header-bluegreen {
+	background-color: #34cceb;
+}
+
+.header-gray {
+	background-color: darkgray;
+	color: white;
+}
+
+.header-magenta {
+	background-color: darkmagenta;
+	color: white;
+}
+
+.box {
+	display: block;
+	padding: 4px 6px;
+	margin-bottom: 8px;
+	font-size: 9px;
+	line-height: 18px;
+}
+
+.box-centered-content {
+	text-align: center;
+}
+.box-azure {
+	background-color: azure;
+}
+
+.box-lavender {
+	background-color: lavenderblush;
+}
+
+.submit {
+	display: inline-block;
+	padding: 4px 16px;
+}
+
+.button {
+	display: inline-block;
+	width: 80px;
+	padding: 4px 4px;
+	text-align: center;
+	font-size: 9px;
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.button-violet {
+	background-color: palevioletred;
+}
+
+.button-cyan {
+	background-color: darkcyan;
+}
+
+.icons {
+	display: inline-block;
+	margin: 0 4px;
+	fill: currentColor;
+	font-size: 16px;
+	vertical-align: middle;
+}
+
+.icons-primary {
+	color: blue;
+}
+
+.icon-secondary {
+	color: gray;
+}
+
+.icons-alert {
+	color: orange;
+}
+
+.icons-warning {
+	color: orangered;
+}
+
+.icons-danger {
+	color: red;
+}
+
+.icons-black {
+	color: black;
+}
+
+.icons-translucent {
+	color: lightgray;
+}
+
+thead {
+	color: #ffffff;
+	background-color: darkslateblue;
+}
+
+td {
+	font-size: 9px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	text-align: center;
+	vertical-align: middle;
+}
+

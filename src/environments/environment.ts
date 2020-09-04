@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+	production: false,
+	jwtModuleWhitelist: 'localhost:22081',
+	apiUrl: 'http://localhost:22081/api',
+	sseUrl: 'http://localhost:22082',
+	rtdWssUrl: 'ws://localhost:22091',
+	hosWssUrl: 'ws://localhost:22092',
+	mtsWssUrl: 'ws://localhost:22093',
+	cubejsApiUrl: 'http://localhost:22030',
+	googleMapApiKey: 'AIzaSyD7Ukxn4iOeZANb0NzhhqDbxUXHIGkt7y0',
+	videoStoreUrl: ''
 };
 
 /*

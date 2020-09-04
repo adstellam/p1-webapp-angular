@@ -1,0 +1,42 @@
+<div class="grid-container">
+    
+    <div class="grid-item-11">
+        <span class="header">Manage VeDAS users</span>
+    </div>
+
+    <div class="grid-item-12">
+        <span class="header">To view, edit, or delete a particular VeDAS user</span>
+    </div>
+
+    <div class="grid-item-21"> 
+        <img src="../../../assets/img/users_img.png" width="160" height="120">
+        <span class="button button-100 button-palevioletred button-taller" (click)="openVedasUserAddModal(cid)">Add User</span>
+    </div>
+
+    <div class="grid-item-22 table-responsive"> 
+        <table class="table table-condensed table-hover">
+            <thead>
+                <tr>
+                    <td>Username</td>
+                    <td>Name</td>
+                    <td>Role</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody *ngIf="vedasUserMap">
+                <tr *ngFor="let vedasUserId of vedasUserMap.keys()">   
+                    <td style="background-color: lightgray;">{{vedasUserId}}</td>
+                    <td>{{vedasUserMap.get(vedasUserId).firstName}} {{vedasUserMap.get(vedasUserId).lastName}}</td>
+                    <td>{{vedasUserMap.get(vedasUserId).role}}</td>
+                    <td>
+                        <span class="button button-60 button-cadetblue" (click)="openVedasUserDetailModal(vedasUserId)">Detail</span>
+                        <span class="button button-60 button-cornflowerblue" (click)="openVedasUserEditModal(vedasUserId)">Edit</span>
+                        <span class="button button-60 button-cornflowerblue" (click)="openVedasUserDeleteModal(vedasUserId)">Delete</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+

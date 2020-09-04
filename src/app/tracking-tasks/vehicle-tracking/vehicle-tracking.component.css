@@ -1,0 +1,58 @@
+.grid-container {
+	display: grid;
+	width: 92%;
+	margin-left: 32px;
+	grid-template-columns: 1fr 4fr;
+	column-gap: 12px;
+}
+
+.grid-item-1 {
+	display: block;
+}
+
+.grid-item-2 {
+	display: block;
+}
+
+.header {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	height: 32px;
+	padding: 4px 6px;
+	font-size: 9px;
+}
+
+.header-bluegreen {
+	background-color: #34cceb;
+}
+
+.header-gray {
+	background-color: darkgray;
+	color: white;
+}
+
+.header-magenta {
+	background-color: darkmagenta;
+	color: white;
+}
+
+.box {
+	padding: 4px 6px;
+	margin-bottom: 8px;
+	font-size: 9px;
+	line-height: 18px;
+}
+
+.box-azure {
+	background-color: azure;
+}
+
+.box-lavender {
+	background-color: lavenderblush;
+}
+
+.submit {
+	display: inline-block;
+	margin: 12px;
+}

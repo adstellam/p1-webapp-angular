@@ -1,0 +1,35 @@
+agm-map {
+	height: 360px;
+}
+
+.button-group {
+	display: flex;
+	margin-top: 9px;
+	flex-direction: row;
+	justify-content: center;
+	background-color: azure;
+}
+
+.button {
+	display: inline-block;
+	width: 100px;
+	padding: 6px 6px;
+	margin: 12px;
+	font-size: 9px;
+	color: white;
+	text-align: center;
+}
+
+.button-gray {
+	background-color: gray;
+}
+
+.button-magenta {
+	background-color: magenta;
+}
+
+.icons {
+	font-size: 12px;
+	vertical-align: middle;
+	margin-right: 4px;
+}
